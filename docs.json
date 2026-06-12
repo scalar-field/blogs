@@ -1,0 +1,42 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Scalar Field Blog",
+  "colors": {
+    "primary": "#334155",
+    "light": "#94a3b8",
+    "dark": "#334155"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Blog",
+        "icon": "https://mintlify.s3.us-west-1.amazonaws.com/polymarket-292d1b1b/images/icons/nav/paper.svg",
+        "pages": ["index"]
+      },
+      {
+        "group": "Strategies",
+        "icon": "https://mintlify.s3.us-west-1.amazonaws.com/polymarket-292d1b1b/images/icons/nav/chart.svg",
+        "pages": ["strategies/ncav-strategy"]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "background": {
+    "color": {
+      "light": "#FFFFFF",
+      "dark": "#000000"
+    }
+  },
+  "navbar": {
+    "primary": {
+      "type": "button",
+      "label": "Main Site",
+      "href": "https://scalarfield.io"
+    }
+  }
+}
