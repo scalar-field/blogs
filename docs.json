@@ -22,7 +22,8 @@
         "icon": "https://mintlify.s3.us-west-1.amazonaws.com/polymarket-292d1b1b/images/icons/nav/chart.svg",
         "pages": [
           "strategies/ncav-strategy",
-          "strategies/fed-rate-cuts-last-5-years-v2"
+          "strategies/fed-rate-cuts-last-5-years-v2",
+          "strategies/scalarfield-wealth-hacker"
         ]
       }
     ]
