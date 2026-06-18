@@ -13,8 +13,20 @@
       {
         "group": "Blog",
         "icon": "https://mintlify.s3.us-west-1.amazonaws.com/polymarket-292d1b1b/images/icons/nav/paper.svg",
+        "pages": ["index"]
+      },
+      {
+        "group": "Strategies",
+        "icon": "https://mintlify.s3.us-west-1.amazonaws.com/polymarket-292d1b1b/images/icons/nav/chart.svg",
         "pages": [
-          "index",
+          "strategies/ncav-strategy",
+          "strategies/fed-rate-cuts-last-5-years-v2"
+        ]
+      },
+      {
+        "group": "How to",
+        "icon": "https://mintlify.s3.us-west-1.amazonaws.com/polymarket-292d1b1b/images/icons/nav/paper.svg",
+        "pages": [
           "guides/build-ai-trading-agent-no-code",
           "guides/create-your-own-ai-trading-agent",
           "guides/build-agentic-trading-strategy-from-scratch",
@@ -25,15 +37,6 @@
           "guides/backtest-options-strategies-beyond-spy-qqq",
           "guides/build-broker-connected-ai-trading-agent",
           "guides/move-from-backtest-to-live-strategy"
-        ]
-      },
-      {
-        "group": "Strategies",
-        "icon": "https://mintlify.s3.us-west-1.amazonaws.com/polymarket-292d1b1b/images/icons/nav/chart.svg",
-        "pages": [
-          "strategies/ncav-strategy",
-          "strategies/fed-rate-cuts-last-5-years-v2",
-          "strategies/scalarfield-wealth-hacker"
         ]
       }
     ]
