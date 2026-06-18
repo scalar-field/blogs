@@ -13,7 +13,10 @@
       {
         "group": "Blog",
         "icon": "https://mintlify.s3.us-west-1.amazonaws.com/polymarket-292d1b1b/images/icons/nav/paper.svg",
-        "pages": ["index"]
+        "pages": [
+          "index",
+          "guides/ultimate-guide-to-agentic-trading"
+        ]
       },
       {
         "group": "Strategies",
