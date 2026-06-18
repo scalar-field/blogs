@@ -14,7 +14,17 @@
         "group": "Blog",
         "icon": "https://mintlify.s3.us-west-1.amazonaws.com/polymarket-292d1b1b/images/icons/nav/paper.svg",
         "pages": [
-          "index"
+          "index",
+          "guides/build-ai-trading-agent-no-code",
+          "guides/create-your-own-ai-trading-agent",
+          "guides/build-agentic-trading-strategy-from-scratch",
+          "guides/turn-market-thesis-into-trading-agent",
+          "guides/build-trading-strategy-plain-english",
+          "guides/backtest-trading-strategy-with-ai",
+          "guides/build-ai-options-trading-agent",
+          "guides/backtest-options-strategies-beyond-spy-qqq",
+          "guides/build-broker-connected-ai-trading-agent",
+          "guides/move-from-backtest-to-live-strategy"
         ]
       },
       {

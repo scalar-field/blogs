@@ -1,0 +1,444 @@
+---
+title: "How to Move From Backtest to Live Strategy With AI Agents"
+description: "Moving from backtest to live strategy means converting historical research into a controlled execution workflow: verified rules, realistic assumptions, paper..."
+date: "2026-06-18"
+---
+
+Moving from **backtest to live strategy** means converting historical research into a controlled execution workflow: verified rules, realistic assumptions, paper testing, broker permissions, risk limits, monitoring, and a kill switch. An AI trading agent can help close that gap, but only if the live agent follows the same logic that was tested.
+
+This guide walks through the process step by step. You’ll learn how to take a promising backtest, convert it into an **AI trading agent** mandate, validate behavior in paper mode, and deploy a **live trading agent** with strict controls for AI-assisted trade execution.
+
+**What you’ll learn:**
+
+* Why many strong backtests fail in live trading
+* How to convert tested rules into an agent mandate
+* How to verify execution assumptions before going live
+* How to paper test an AI trading agent
+* How to set allocation, max-loss, and broker permissions
+* How ScalarField fits into the backtest-to-live workflow
+* How to monitor and improve a live strategy without overreacting
+
+---
+
+## Why the Backtest-to-Live Gap Matters
+
+A backtest is research. A live strategy is operating infrastructure.
+
+That difference matters because a backtest can assume clean data, perfect timing, clean fills, and uninterrupted execution. Live markets introduce slippage, rejected orders, partial fills, stale data, liquidity gaps, broker outages, emotional pressure, and regime shifts.
+
+A strategy can fail live even if the backtest was directionally valid.
+
+Common reasons include:
+
+* Overfitted parameters
+* Unrealistic fill assumptions
+* Ignored transaction costs
+* Data timing errors
+* Poor liquidity
+* Strategy drift after deployment
+* Missing risk limits
+* Manual hesitation or over-intervention
+* No monitoring process
+
+The goal is not to eliminate uncertainty. The goal is to make the transition from research to execution controlled, observable, and risk-bounded.
+
+---
+
+## Backtest vs Live Strategy
+
+Before deploying anything, be clear about what changes.
+
+| Area | Backtest | Live Strategy |
+|---|---|---|
+| Data | Historical and complete | Real-time, sometimes delayed or missing |
+| Fills | Assumed | Actual broker execution |
+| Costs | Estimated | Real spreads, slippage, and fees |
+| Orders | Simulated | Rejected, partial, delayed, or filled |
+| Psychology | None | Human pressure and override risk |
+| Risk | Modeled | Real capital and real drawdowns |
+| Monitoring | Post-analysis | Continuous supervision |
+
+An **AI trading agent** helps only if it respects these differences. The agent should not blindly replay a backtest. It should operate the tested logic under live constraints.
+
+---
+
+## How to Move From Backtest to Live Strategy: Step-by-Step
+
+A strong how-to workflow moves chronologically: review the backtest, validate assumptions, convert rules, verify the agent, paper trade, connect broker execution, deploy small, and monitor.
+
+Do not jump from a good equity curve to live capital.
+
+---
+
+## Step 1: Audit the Backtest Before Deployment
+
+Before turning a backtest into a live trading agent, audit the research.
+
+Review:
+
+* What market thesis was tested?
+* Which assets were included?
+* What data was used?
+* Were prices adjusted correctly?
+* Were transaction costs included?
+* Were slippage and spreads modeled?
+* Was there survivorship bias?
+* Were rules changed after seeing results?
+* Did the strategy work across regimes?
+* Did performance depend on one unusual period?
+
+A backtest does not need to be perfect. But you need to know its weak points before automation touches live capital.
+
+### Backtest Audit Checklist
+
+| Question | Why It Matters |
+|---|---|
+| Did the strategy include costs? | Prevents overstated returns |
+| Was out-of-sample testing used? | Reduces curve-fitting risk |
+| Are trades frequent? | High turnover increases cost sensitivity |
+| Did one asset drive returns? | Reveals concentration risk |
+| Did drawdowns match your tolerance? | Prevents abandonment under pressure |
+| Are assumptions realistic? | Bridges research and execution |
+
+If the backtest only works under perfect conditions, it is not ready for a live agent.
+
+---
+
+## Step 2: Freeze the Strategy Rules
+
+Before live deployment, freeze the rules.
+
+This means writing down exactly what the live strategy will monitor and execute:
+
+* Asset universe
+* Entry rules
+* Exit rules
+* Position sizing
+* Rebalance frequency
+* No-trade conditions
+* Risk limits
+* Execution assumptions
+* Reporting requirements
+
+Do not keep tweaking rules after every backtest run. That is how overfitting sneaks into production.
+
+Use this structure:
+
+> “The live strategy will trade [assets] using [data], enter when [conditions], exit when [conditions], size positions by [rule], pause when [risk rule], and report [frequency].”
+
+The live mandate should match the tested logic as closely as possible.
+
+---
+
+## Step 3: Convert the Backtest Into an Agent Mandate
+
+An agent mandate translates research logic into operational instructions.
+
+Example:
+
+> “Build an AI trading agent that monitors SPY, QQQ, IWM, and DIA using daily closing prices. Enter long when the ETF closes above its 50-day moving average and its 20-day moving average is above its 50-day moving average. Allocate 25% of strategy capital per position, with no more than four positions open. Exit if the ETF closes below its 20-day moving average or loses 4%. Do not open new positions if total strategy drawdown exceeds 10%. Send a daily report after market close and require approval before live deployment.”
+
+A good mandate includes:
+
+* Objective
+* Eligible assets
+* Signal logic
+* Entry rule
+* Exit rule
+* Sizing rule
+* Drawdown rule
+* No-trade rule
+* Reporting rule
+* Approval requirements
+
+The mandate is the bridge from research to live execution.
+
+---
+
+## Step 4: Verify That the Agent Matches the Backtest
+
+Verification is where you catch translation errors.
+
+Before paper trading, confirm:
+
+* The asset universe is identical or intentionally adjusted.
+* The data frequency matches the backtest.
+* Entry and exit rules are interpreted correctly.
+* Position sizing matches tested assumptions.
+* No-trade conditions are enforced.
+* Drawdown limits are hard constraints.
+* Reporting is clear.
+* The agent cannot increase allocation without approval.
+* The agent cannot trade instruments outside the mandate.
+
+Ask one question:
+
+> “If this agent acts tomorrow, will I know exactly which tested rule caused the action?”
+
+If the answer is no, do not proceed.
+
+---
+
+## Step 5: Rebuild Realistic Execution Assumptions
+
+Live execution is where many backtests break.
+
+Before deployment, define:
+
+* Order type: market, limit, or both
+* Timing: open, close, intraday, or scheduled
+* Slippage assumptions
+* Maximum acceptable spread
+* Partial-fill handling
+* Rejected-order handling
+* Cancel-and-replace logic
+* Whether after-hours trading is allowed
+* Whether the agent can scale in or out
+
+For most first deployments, conservative rules are better:
+
+* Use limit orders where practical.
+* Avoid after-hours trading unless required.
+* Cancel stale orders after a defined period.
+* Alert on rejected or partial orders.
+* Do not average down unless explicitly allowed.
+* Do not increase risk after losses without approval.
+
+A signal is not a fill. The live strategy needs order logic.
+
+---
+
+## Step 6: Set Live Risk Controls
+
+Backtested drawdowns are estimates. Live drawdowns are capital loss.
+
+Before the agent can trade, define:
+
+* Strategy allocation
+* Max position size
+* Max order size
+* Max daily loss
+* Max total drawdown
+* Max open positions
+* Max exposure by asset, sector, or instrument
+* Leverage permissions
+* Kill switch conditions
+
+A starter risk framework:
+
+| Risk Control | Conservative Rule |
+|---|---|
+| Strategy allocation | Small portfolio sleeve |
+| Max position size | 5%–15% of allocation |
+| Max daily loss | 1%–2% of allocation |
+| Max total drawdown | 5%–10% of allocation |
+| Max open positions | 3–5 |
+| Leverage | Disabled initially |
+| Allocation increase | Require approval |
+| Limit breach | Pause and alert |
+
+The agent should not define its own risk budget. You define the boundaries; the agent operates inside them.
+
+---
+
+## Step 7: Use ScalarField to Connect Research to Execution
+
+This is where ScalarField fits naturally into the workflow.
+
+ScalarField is a Y Combinator-backed agentic AI trading desk that lets retail and professional traders build, verify, and deploy autonomous AI trading agents through natural language. Instead of rewriting research into brittle scripts, traders can express the tested strategy as an agent mandate, set risk limits, connect broker APIs, and monitor execution.
+
+The value is continuity:
+
+* The thesis becomes measurable rules.
+* The rules become a backtest.
+* The backtest becomes an agent mandate.
+* The mandate becomes a paper-traded workflow.
+* The workflow becomes live only after verification.
+
+ScalarField is designed for this kind of controlled progression. It is not just an AI prompt box; it is infrastructure for moving from hypothesis to AI-assisted trade execution under defined constraints.
+
+---
+
+## Step 8: Paper Trade the Agent
+
+Paper trading tests operational behavior.
+
+Watch whether the agent:
+
+* Reads data correctly
+* Detects signals at the right time
+* Sizes positions correctly
+* Applies no-trade rules
+* Handles pending orders safely
+* Generates clear reports
+* Avoids duplicate trades
+* Pauses after drawdown limits
+* Matches the backtested logic
+
+Do not judge paper trading only by profit and loss.
+
+A profitable paper run with broken rules is a failure. A losing paper run that follows the mandate may simply mean the strategy needs more research.
+
+---
+
+## Step 9: Deploy Live With Approval First
+
+Before full automation, use approval-based live execution.
+
+In this mode, the agent identifies the signal, checks risk, prepares the action, and asks for confirmation before placing orders.
+
+This helps validate:
+
+* Signal timing
+* Order sizing
+* Broker state
+* Buying power checks
+* Exposure checks
+* Human understanding of the action
+* Whether alerts contain enough context
+
+Approval-first deployment is slower, but it is safer. It gives you time to inspect the agent’s reasoning before capital moves.
+
+---
+
+## Step 10: Start With a Small Live Allocation
+
+Once approval-based execution is stable, deploy a small automated allocation.
+
+The first live phase should validate:
+
+* Fill prices
+* Slippage
+* Spreads
+* Order rejects
+* Partial fills
+* Alert timing
+* Position updates
+* Drawdown behavior
+* Broker connection reliability
+
+Do not scale because one week looks good.
+
+Scale only after the agent demonstrates stable behavior across multiple signals, market conditions, and operational edge cases.
+
+---
+
+## Step 11: Monitor the Live Trading Agent Like Infrastructure
+
+A **live trading agent** should be monitored like production software and trading risk at the same time.
+
+Track:
+
+* Open positions
+* Pending orders
+* Recent fills
+* Daily P&L
+* Drawdown
+* Exposure by asset or sector
+* Rule triggers
+* Skipped trades
+* Rejected orders
+* Slippage
+* Alert quality
+* Broker connectivity
+
+A good agent report should answer:
+
+* What changed in the market?
+* Which rule triggered?
+* What action was taken or skipped?
+* What risk checks passed?
+* What positions are open?
+* What is current drawdown?
+* What should happen next?
+
+If you cannot audit it, you should not scale it.
+
+---
+
+## Step 12: Compare Live Results to Backtest Expectations
+
+After live deployment, compare reality to research.
+
+Review:
+
+* Are signal frequencies similar?
+* Are fills worse than assumed?
+* Is slippage larger than expected?
+* Are drawdowns within expected range?
+* Are exits behaving correctly?
+* Are no-trade rules skipping too much or too little?
+* Is performance concentrated in one asset?
+* Is the strategy drifting from the original mandate?
+
+Separate two questions:
+
+1. **Is the agent following the rules?**
+2. **Are the rules still good?**
+
+If the agent is not following rules, fix operations. If it follows rules but performance is weak, revisit the strategy.
+
+---
+
+## Common Mistakes to Avoid
+
+### Mistake 1: Deploying a Different Strategy Than You Backtested
+
+Small changes can create a completely different live strategy.
+
+Freeze the rules before deployment.
+
+### Mistake 2: Ignoring Execution Costs
+
+Backtests often understate slippage and spreads.
+
+Live execution must be monitored closely.
+
+### Mistake 3: Skipping Paper Trading
+
+Paper trading tests operational behavior.
+
+Do not skip it because the backtest looks strong.
+
+### Mistake 4: Giving the Agent Too Much Capital Too Early
+
+Start small. Scale only after live behavior is stable.
+
+Automation should earn allocation.
+
+### Mistake 5: Treating the Agent as a Black Box
+
+A live agent must explain actions, skipped trades, risk checks, and position state.
+
+No audit trail, no scale.
+
+---
+
+## Final Checklist: Backtest to Live Strategy
+
+Before moving live, confirm:
+
+* **Backtest audit:** Assumptions, costs, and biases were reviewed.
+* **Rules frozen:** The live mandate matches tested logic.
+* **Agent mandate:** Entries, exits, sizing, and no-trade rules are explicit.
+* **Execution:** Order types and slippage rules are defined.
+* **Risk:** Allocation, max loss, and drawdown limits are hard constraints.
+* **Verification:** Agent behavior matches the backtest.
+* **Paper test:** The workflow has been tested without live capital.
+* **Broker permissions:** Access is scoped tightly.
+* **Approval mode:** Initial live trades require confirmation.
+* **Small allocation:** First deployment is intentionally limited.
+* **Monitoring:** Reports, alerts, and logs are enabled.
+* **Kill switch:** The strategy can be paused immediately.
+
+If any item is missing, the strategy is not ready for live execution.
+
+---
+
+## Final Thoughts
+
+Moving from **backtest to live strategy** is not a single click. It is a disciplined transition from research to execution: audit the backtest, freeze the rules, verify the agent, paper trade, deploy small, and monitor continuously.
+
+ScalarField gives traders a practical way to make that transition through natural language AI trading agents. By connecting tested strategy logic to broker-aware execution and risk controls, it helps replace brittle scripts and emotional discretionary execution with a more transparent, agentic workflow.
+
+The best live strategies are not just backtests with broker access. They are controlled systems that know what to trade, when to act, when to stop, and how to explain every decision.

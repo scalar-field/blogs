@@ -1,0 +1,500 @@
+---
+title: "How to Build an AI Options Trading Agent"
+description: "To build AI options trading agent systems, you need more than a signal generator."
+date: "2026-06-18"
+---
+
+To **build AI options trading agent** systems, you need more than a signal generator. Options require contract selection, expiry rules, strike logic, Greeks, implied volatility, liquidity checks, position sizing, and strict risk limits before any agent can safely monitor or execute trades.
+
+This guide walks through the process step by step. You’ll learn how to design an **AI options trading agent**, how it differs from an **AI options trading bot**, what rules every **options trading agent** needs, and how ScalarField fits into a controlled agentic trading workflow.
+
+**What you’ll learn:**
+
+* What an AI options trading agent is
+* Why options automation is harder than stock automation
+* How to define strategy, contracts, expiries, and risk limits
+* How to structure entry, exit, and no-trade conditions
+* How to verify and paper test an options agent before live deployment
+* How ScalarField helps turn plain-English options logic into autonomous trading agents
+
+---
+
+## What Is an AI Options Trading Agent?
+
+An **AI options trading agent** is an autonomous or semi-autonomous system that can monitor market conditions, evaluate options chains, apply risk rules, select eligible contracts, and alert or execute trades through approved broker permissions.
+
+The key difference from a basic bot is context.
+
+An **AI options trading bot** might follow one narrow rule, such as “sell a put spread when implied volatility is high.” An options trading agent should check the broader setup first: liquidity, expiry, strike range, delta, bid-ask spread, earnings calendar, portfolio exposure, max loss, and whether the trade still fits the strategy mandate.
+
+In simple terms:
+
+> A bot reacts to a trigger. An agent manages the full options workflow.
+
+That workflow usually includes:
+
+1. Monitoring the underlying asset
+2. Screening the options chain
+3. Filtering by expiry, strike, liquidity, Greeks, and implied volatility
+4. Applying portfolio and risk constraints
+5. Selecting an action: alert, enter, adjust, exit, or skip
+6. Reporting the rationale
+7. Monitoring the position after entry
+
+That last point matters. Options positions change after entry because delta, gamma, theta, vega, implied volatility, and time to expiry all move continuously.
+
+---
+
+## Why Options Need an Agentic Workflow
+
+Options are not just leveraged stock trades. They are multi-variable instruments.
+
+A stock strategy can often be summarized by direction, size, and exit. An options strategy also needs to define:
+
+* Contract type: call, put, spread, or multi-leg structure
+* Expiry window
+* Strike selection
+* Delta or moneyness range
+* Implied volatility filter
+* Liquidity threshold
+* Maximum spread width
+* Premium or debit limit
+* Assignment risk
+* Event risk
+* Greek exposure
+* Exit and adjustment rules
+
+This is why options automation breaks so often. The entry signal may be right, but the contract selection may be wrong.
+
+### Stock Agent vs Options Agent
+
+| Area | Stock Trading Agent | Options Trading Agent |
+|---|---|---|
+| Main decision | Buy, sell, hold, hedge | Select structure, strike, expiry, size, and exit |
+| Key data | Price, volume, trend, portfolio exposure | Options chain, Greeks, IV, liquidity, underlying trend |
+| Risk | Price movement | Price, time decay, volatility, assignment, liquidity |
+| Execution | Usually one instrument | Often one or more option legs |
+| Monitoring | Price and P&L | P&L, Greeks, IV, expiry, spread, underlying movement |
+| Complexity | Moderate | High |
+
+An agentic approach forces the strategy to define all the moving parts before the system can act.
+
+---
+
+## How to Build AI Options Trading Agent Workflows: Step-by-Step
+
+A good how-to process starts with the thesis, not the option chain.
+
+Do not begin by asking, “Which contract should the agent trade?” Start by asking, “What market behavior is the agent designed to capture, hedge, or monetize?”
+
+---
+
+## Step 1: Define the Options Strategy Objective
+
+Every options agent needs one primary job.
+
+Weak objectives sound like this:
+
+* “Trade options with AI.”
+* “Find profitable calls.”
+* “Sell premium when IV is high.”
+* “Make income with options.”
+
+Strong objectives are specific:
+
+* “Sell defined-risk put spreads on liquid ETFs when implied volatility is elevated and trend is stable.”
+* “Buy call spreads on large-cap momentum stocks after trend confirmation and before volatility expands.”
+* “Hedge a tech-heavy portfolio using index put spreads when drawdown and volatility rise.”
+* “Monitor earnings volatility setups and alert when liquidity and premium justify a defined-risk trade.”
+
+Use this template:
+
+> “Build an AI options trading agent that [strategy objective] on [underlying universe], using [signals], selecting contracts by [expiry/strike/Greek rules], with [risk limits], and [execution or alert behavior].”
+
+Example:
+
+> “Build an AI options trading agent that monitors SPY and QQQ for defined-risk put spread opportunities when implied volatility is elevated, trend is neutral-to-bullish, and options liquidity is strong. Require approval before live execution.”
+
+The objective should define the agent’s job before it touches the options chain.
+
+---
+
+## Step 2: Choose the Underlying Universe
+
+The underlying universe determines whether the strategy is tradable.
+
+For options agents, liquidity matters more than creativity. Thin contracts can destroy a strategy through wide spreads, poor fills, and limited exit flexibility.
+
+Good first universes include:
+
+* Highly liquid index ETFs
+* Mega-cap stocks with active options markets
+* Sector ETFs with strong volume
+* Existing portfolio holdings that need hedging
+
+Avoid starting with illiquid small caps, obscure weeklies, or complex multi-leg trades across thin chains.
+
+### Underlying Universe Examples
+
+| Universe | Good For | Key Risk |
+|---|---|---|
+| SPY, QQQ, IWM, DIA | Index spreads, hedging, premium strategies | Market beta and macro shocks |
+| Mega-cap stocks | Directional calls/puts, earnings monitoring | Single-name gap risk |
+| Sector ETFs | Thematic rotation or hedging | Sector concentration |
+| Portfolio holdings | Covered calls, protective puts | Position-specific risk |
+
+A narrow, liquid universe is easier to verify and safer to paper test.
+
+---
+
+## Step 3: Define the Options Structure
+
+The agent must know what type of options trade it is allowed to consider.
+
+Do not leave this open-ended.
+
+Common structures include:
+
+* Long calls
+* Long puts
+* Covered calls
+* Cash-secured puts
+* Vertical call spreads
+* Vertical put spreads
+* Protective puts
+* Collars
+* Iron condors
+* Calendar spreads
+
+For a first agent, defined-risk structures are usually easier to control than naked short options.
+
+### Structure Selection Table
+
+| Strategy Objective | Possible Structure | Why It Fits |
+|---|---|---|
+| Bullish directional view | Long call or call spread | Upside exposure with capped risk |
+| Bearish directional view | Long put or put spread | Downside exposure with capped risk |
+| Income on owned stock | Covered call | Premium collection against holdings |
+| Portfolio hedge | Protective put or put spread | Downside protection |
+| Premium selling | Defined-risk credit spread | Limited max loss if structured correctly |
+| Range-bound view | Iron condor | Premium collection with defined range risk |
+
+The structure should match the thesis. A bullish stock view does not automatically mean buying the nearest weekly call.
+
+---
+
+## Step 4: Define Expiry Rules
+
+Expiry selection is one of the most important parts of options automation.
+
+Short-dated options are sensitive to gamma and time decay. Longer-dated options may be less explosive but more expensive. An agent needs a rule, not a guess.
+
+Define:
+
+* Minimum days to expiry
+* Maximum days to expiry
+* Whether weekly options are allowed
+* Whether earnings weeks are allowed
+* Whether the agent should avoid expiration day
+* When to exit before expiry
+
+Example rules:
+
+* “Only consider contracts with 21 to 45 days to expiry.”
+* “Do not open new trades with fewer than 10 days to expiry.”
+* “Exit any open short spread before five days to expiry.”
+* “Avoid opening new positions during the week of earnings.”
+
+Expiry rules prevent the agent from drifting into trades with completely different risk profiles.
+
+---
+
+## Step 5: Define Strike and Greek Filters
+
+Strike selection should be systematic.
+
+Instead of saying “choose a reasonable strike,” define ranges the agent can screen.
+
+Useful filters include:
+
+* Delta range
+* Moneyness range
+* Strike distance from underlying price
+* Minimum premium
+* Maximum debit
+* Spread width
+* Probability-based filters
+* Gamma or vega limits
+
+Examples:
+
+* “For bullish call spreads, select long calls with delta between 0.35 and 0.60.”
+* “For put spreads, sell strikes with delta between 0.20 and 0.35.”
+* “Only use spread widths between $2.50 and $10.”
+* “Do not enter if bid-ask spread is wider than 10% of mid price.”
+
+The goal is to define eligible contracts, not let the system improvise.
+
+### Contract Selection Checklist
+
+| Filter | Example Rule |
+|---|---|
+| Expiry | 21–45 days to expiry |
+| Delta | 0.20–0.60 depending on structure |
+| Liquidity | Minimum open interest and volume |
+| Spread | Bid-ask spread below threshold |
+| Premium | Minimum credit or max debit |
+| Earnings | Avoid restricted event windows |
+| Risk | Max loss fits allocation rules |
+
+An options agent should always screen contracts before proposing or placing trades.
+
+---
+
+## Step 6: Add Liquidity and Execution Rules
+
+Options liquidity is not optional.
+
+A trade can look attractive on paper and still be unusable if the spread is too wide or volume is too low.
+
+Define no-trade rules such as:
+
+* Do not trade contracts with low open interest.
+* Do not trade if bid-ask spread exceeds a defined percentage of mid price.
+* Do not trade if volume is below threshold.
+* Do not use market orders.
+* Do not trade during the first or last few minutes of the session unless explicitly allowed.
+* Do not adjust multi-leg trades unless the expected fill is within an acceptable range.
+
+For options, execution quality is part of the strategy. Ignoring it can erase the edge.
+
+---
+
+## Step 7: Set Position Sizing and Max Loss Rules
+
+Options can create nonlinear risk. Position sizing must be explicit.
+
+Define:
+
+* Strategy allocation
+* Max risk per trade
+* Max risk by underlying
+* Max total options exposure
+* Max daily loss
+* Max total drawdown
+* Max number of open trades
+* Max number of trades per day
+* Whether trades require approval
+
+A conservative starter policy:
+
+| Risk Control | Example Rule |
+|---|---|
+| Strategy allocation | Small options-only sleeve |
+| Max risk per trade | 0.5%–2% of strategy capital |
+| Max exposure per underlying | 10%–20% of options sleeve |
+| Max daily loss | 2% of options sleeve |
+| Max drawdown | 8%–10% of options sleeve |
+| Naked options | Not allowed initially |
+| Live execution | Require approval at first |
+
+For options agents, max loss should be calculated before entry. If the trade’s worst-case loss is unclear, the agent should not trade it.
+
+---
+
+## Step 8: Define Entry, Exit, and Adjustment Rules
+
+The agent needs complete lifecycle rules.
+
+### Entry Rules
+
+Example:
+
+> “Enter a QQQ call spread only if QQQ closes above its 50-day moving average, implied volatility is below its 60-day average, and the selected spread has acceptable liquidity.”
+
+### Exit Rules
+
+Examples:
+
+* Exit at 50% of max profit.
+* Exit if loss reaches 50% of max risk.
+* Exit if the underlying breaks trend.
+* Exit five trading days before expiry.
+* Exit if liquidity deteriorates materially.
+
+### Adjustment Rules
+
+Be careful with automated adjustments. Many traders use adjustments to avoid realizing losses.
+
+If allowed, define them strictly:
+
+* Adjust only once per trade.
+* Do not increase total risk.
+* Do not roll to a larger max loss.
+* Require approval for rolls.
+* Close rather than adjust if max drawdown is reached.
+
+An options trading agent should never “repair” a trade by silently adding risk.
+
+---
+
+## Step 9: Verify the Agent Before Paper Trading
+
+Verification checks whether the agent understood the mandate.
+
+Before paper trading, confirm:
+
+* Underlying universe is correct
+* Options structure is defined
+* Expiry range is enforced
+* Strike and delta filters are clear
+* Liquidity rules are active
+* Risk per trade is capped
+* Max loss is calculated before entry
+* Earnings and event restrictions are enforced
+* Exit and adjustment rules are defined
+* Approval rules are clear
+
+Ask:
+
+> “If this agent selects a contract tomorrow, will I understand exactly why?”
+
+If not, the mandate is not ready.
+
+---
+
+## Step 10: Use ScalarField to Move From Mandate to Agent
+
+This is where ScalarField fits naturally into the options workflow.
+
+ScalarField is a Y Combinator-backed agentic AI trading desk that lets traders build, verify, and deploy autonomous AI trading agents through natural language. For options traders, that matters because the strategy is not just an entry signal—it is a contract-selection and risk-management process.
+
+A plain-English mandate might look like this:
+
+> “Build an AI options trading agent that monitors SPY and QQQ for defined-risk put spread opportunities. Only consider contracts with 21 to 45 days to expiry, short strike delta between 0.20 and 0.35, acceptable bid-ask spreads, and sufficient open interest. Enter only when the underlying is above its 50-day moving average and implied volatility is elevated relative to its recent range. Risk no more than 1% of allocated capital per trade. Exit at 50% of max profit, 50% of max loss, or five trading days before expiry. Require approval before live execution and send a daily report.”
+
+ScalarField helps close the loop between:
+
+* Strategy thesis
+* Options-chain screening
+* Risk rules
+* Broker-connected execution
+* Agent monitoring
+* Trade reporting
+
+The product value is not that it makes options easy. Options are never easy. The value is that it makes the workflow more explicit, auditable, and enforceable.
+
+---
+
+## Step 11: Paper Test the Options Agent
+
+Paper testing is essential.
+
+Watch whether the agent:
+
+* Selects contracts within the allowed expiry range
+* Applies strike and delta filters correctly
+* Skips illiquid contracts
+* Calculates max risk before entry
+* Sizes positions correctly
+* Exits according to the mandate
+* Avoids duplicate orders
+* Handles rejected or partial fills safely
+* Reports rationale clearly
+
+Do not judge the first paper test only by P&L. Judge whether the agent behaves correctly.
+
+A profitable paper test with broken contract selection is a failure. A losing paper test that follows the rules may simply reveal that the strategy needs refinement.
+
+---
+
+## Step 12: Deploy Small and Monitor Greeks Closely
+
+Once paper behavior is stable, deploy with a small allocation.
+
+Monitor:
+
+* Open positions
+* Max risk per position
+* Delta exposure
+* Gamma exposure
+* Theta decay
+* Vega exposure
+* Implied volatility changes
+* Days to expiry
+* Bid-ask spreads
+* Fill quality
+* Assignment or exercise risk
+* Total drawdown
+
+Options agents require closer supervision than simple equity agents. The position can change meaning even if the underlying price barely moves.
+
+Scale only after the system proves it can handle live market conditions.
+
+---
+
+## Common Mistakes to Avoid
+
+### Mistake 1: Letting the Agent Choose Any Contract
+
+“Trade bullish options” is too vague.
+
+Define expiry, strike, delta, liquidity, structure, and risk filters.
+
+### Mistake 2: Ignoring Liquidity
+
+Wide spreads can turn a good idea into a bad trade.
+
+Liquidity filters should be mandatory.
+
+### Mistake 3: Automating Naked Risk Too Early
+
+Naked short options require advanced risk controls.
+
+Start with defined-risk structures unless you have a strong reason not to.
+
+### Mistake 4: Missing Earnings and Event Risk
+
+Options prices can change violently around earnings and major catalysts.
+
+Define whether the agent can trade those windows.
+
+### Mistake 5: Allowing Adjustments That Add Risk
+
+Many “adjustments” are just larger bets in disguise.
+
+Require approval for rolls, added legs, or increased exposure.
+
+---
+
+## Final Checklist: Build AI Options Trading Agent Systems Safely
+
+Before deployment, confirm:
+
+* **Objective:** The agent has one clear options strategy.
+* **Underlying universe:** Eligible tickers are liquid and defined.
+* **Structure:** Calls, puts, spreads, collars, or other structures are specified.
+* **Expiry:** Minimum and maximum days to expiry are clear.
+* **Strike rules:** Delta, moneyness, or spread width filters are defined.
+* **Liquidity:** Volume, open interest, and bid-ask rules are enforced.
+* **Entry rules:** Underlying and options conditions are measurable.
+* **Exit rules:** Profit, loss, time, and thesis exits are explicit.
+* **Adjustments:** Rolls or changes require strict limits or approval.
+* **Sizing:** Max risk per trade is capped.
+* **Drawdown:** Strategy pause rules are defined.
+* **Verification:** Contract selection logic has been reviewed.
+* **Paper test:** Behavior has been tested without live capital.
+* **Monitoring:** Greeks, IV, expiry, and P&L are tracked.
+* **Kill switch:** The agent can be paused immediately.
+
+If any item is missing, the options agent is not ready for live trading.
+
+---
+
+## Final Thoughts
+
+To **build AI options trading agent** systems safely, you need to define the full options workflow: thesis, underlying universe, structure, expiry, strike filters, liquidity rules, Greeks, sizing, exits, and risk controls.
+
+ScalarField gives traders a practical way to express that workflow in natural language, verify the logic, and deploy autonomous AI trading agents through connected broker infrastructure. For retail and professional options traders, the advantage is not blind automation—it is disciplined, risk-bounded execution.
+
+Options reward precision and punish ambiguity. A good AI options trading agent should make the strategy more precise before it ever places a trade.

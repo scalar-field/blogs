@@ -1,0 +1,471 @@
+---
+title: "How to Build a Broker-Connected AI Trading Agent"
+description: "A broker connected AI trading agent is an autonomous trading system that can monitor markets, apply strategy rules, enforce risk limits, and send orders..."
+date: "2026-06-18"
+---
+
+A **broker connected AI trading agent** is an autonomous trading system that can monitor markets, apply strategy rules, enforce risk limits, and send orders through a brokerage connection. To build one safely, you need more than a trading signal—you need permissions, allocation limits, execution rules, monitoring, and a kill switch before any live order is allowed.
+
+This guide walks through the process step by step. You’ll learn how to design a **broker connected trading agent**, how it differs from a basic **broker connected trading bot**, and how ScalarField fits into a controlled workflow for AI-assisted trade execution.
+
+**What you’ll learn:**
+
+* What a broker-connected AI trading agent is
+* Why broker connectivity changes the risk profile
+* How to define strategy rules before execution access
+* How to set broker permissions, allocation, and max-loss limits
+* How to verify, paper test, and monitor the agent
+* How ScalarField helps connect natural-language strategy design to broker-connected execution
+
+---
+
+## What Is a Broker Connected AI Trading Agent?
+
+A **broker connected AI trading agent** is a trading agent that can interact with a brokerage account through secure API connectivity. Depending on its permissions, it may monitor account state, read positions, check buying power, place orders, manage exits, send alerts, or pause trading when risk limits are reached.
+
+The broker connection is what turns a research system into execution infrastructure.
+
+That makes the agent more powerful, but also more sensitive. A strategy that only sends alerts can be wrong without immediately moving money. A broker-connected agent can translate bad logic into real orders if the safeguards are weak.
+
+A serious broker-connected agent should have:
+
+* A clearly defined strategy mandate
+* Approved assets and instruments
+* Account and allocation boundaries
+* Max position size rules
+* Max daily loss and drawdown rules
+* Execution permissions
+* Human approval checkpoints
+* Order handling logic
+* Monitoring and alerts
+* A kill switch
+
+The agent’s job is not to improvise. Its job is to execute a defined trading process inside controlled limits.
+
+---
+
+## Broker Connected Trading Agent vs Broker Connected Trading Bot
+
+A **broker connected trading bot** usually executes a fixed rule: if X happens, place Y order. That can be useful for simple automation, but it is often too narrow for real portfolio supervision.
+
+A broker-connected trading agent should manage a broader loop.
+
+| Capability | Broker Connected Trading Bot | Broker Connected AI Trading Agent |
+|---|---|---|
+| Primary function | Execute predefined orders | Manage a strategy workflow |
+| Context awareness | Usually narrow | Market, portfolio, and risk-aware |
+| Broker interaction | Places orders | Reads account state, checks limits, executes or alerts |
+| Risk controls | Often manually coded | Built into the agent mandate |
+| Monitoring | Basic logs | Ongoing state, rationale, and alerts |
+| Adaptability | Requires code edits | Can operate within predefined boundaries |
+| Best use case | Simple execution | Strategy execution plus risk management |
+
+The difference is not cosmetic. Once a system has broker access, risk controls become part of the product, not an afterthought.
+
+---
+
+## How to Build a Broker Connected AI Trading Agent: Step-by-Step
+
+A how-to workflow should move chronologically. Do not start by connecting your brokerage account. Start with the strategy, then define the boundaries, then connect execution only after verification.
+
+Broker access should be the last step before controlled deployment, not the first.
+
+---
+
+## Step 1: Define the Agent’s Trading Mandate
+
+Every broker-connected agent needs one clear job.
+
+Weak mandates sound like this:
+
+* “Trade my account with AI.”
+* “Find profitable trades.”
+* “Buy good stocks.”
+* “Manage my portfolio automatically.”
+
+Strong mandates are specific:
+
+* “Monitor SPY and QQQ for medium-term trend continuation and alert before entries.”
+* “Rebalance a four-ETF portfolio when allocations drift more than 5% from target.”
+* “Hedge a tech-heavy portfolio when drawdown and volatility both rise.”
+* “Sell defined-risk put spreads only on approved liquid ETFs with strict risk caps.”
+
+Use this structure:
+
+> “Build a broker connected AI trading agent that [strategy objective] across [approved assets], using [signals], with [risk limits], and [execution permissions].”
+
+Example:
+
+> “Build a broker connected AI trading agent that monitors SPY, QQQ, IWM, and DIA for medium-term trend continuation using daily moving averages. Allocate no more than 15% of strategy capital per position, pause if drawdown exceeds 8%, and require approval before live deployment.”
+
+A broker-connected agent should never begin with vague discretion.
+
+---
+
+## Step 2: Choose the Account and Broker Permissions
+
+Before execution, decide what the agent is allowed to access.
+
+Broker permissions should be scoped tightly. The agent should only have the authority required for the strategy.
+
+Define whether the agent can:
+
+* Read account balances
+* Read positions
+* Read open orders
+* Place orders
+* Cancel orders
+* Trade equities
+* Trade ETFs
+* Trade options
+* Use margin
+* Trade outside regular hours
+* Increase allocation
+
+### Permission Design Table
+
+| Permission | Conservative Starting Choice |
+|---|---|
+| Account read access | Allowed |
+| Position read access | Allowed |
+| Order placement | Paper mode first |
+| Live trading | Require approval initially |
+| Options trading | Disabled unless strategy requires it |
+| Margin | Disabled initially |
+| New instruments | Require explicit approval |
+| Allocation increases | Require explicit approval |
+
+The safest first version is usually a read-only or paper-trading agent. Live order permission should come after the strategy is verified.
+
+---
+
+## Step 3: Define the Approved Asset Universe
+
+A broker-connected agent must know exactly what it can trade.
+
+Do not say “trade stocks.” Define the universe.
+
+Examples:
+
+* SPY, QQQ, IWM, DIA only
+* Large-cap technology stocks from an approved watchlist
+* Existing portfolio holdings only
+* Sector ETFs only
+* US-listed equities and ETFs, no options
+* Defined-risk options only, no naked short options
+
+The asset universe is a risk control. It prevents the agent from drifting into instruments the strategy was not designed to handle.
+
+### Asset Universe Examples
+
+| Universe | Good Use Case | Key Risk |
+|---|---|---|
+| Major ETFs | Trend, rebalance, hedging | Macro exposure |
+| Large-cap equities | Momentum, relative strength | Earnings gaps |
+| Existing holdings | Portfolio management | Concentration |
+| Options | Hedging, income, volatility | Greeks, assignment, liquidity |
+| Prediction markets | Event-driven strategies | Resolution risk |
+
+Start narrow. Expand only after the agent’s behavior is stable.
+
+---
+
+## Step 4: Define Strategy Signals and Decision Rules
+
+The agent needs measurable rules.
+
+Bad rule:
+
+> “Buy when the market looks strong.”
+
+Better rule:
+
+> “Buy when SPY closes above its 50-day moving average.”
+
+Stronger rule:
+
+> “Buy when SPY closes above its 50-day moving average, its 20-day moving average is above the 50-day moving average, realized volatility is below its 60-day average, and the trade does not violate portfolio exposure limits.”
+
+Useful signal types include:
+
+* Trend filters
+* Momentum signals
+* Volatility filters
+* Portfolio drift thresholds
+* Drawdown triggers
+* Options implied volatility filters
+* Event or news conditions
+* Liquidity filters
+
+The agent should be able to explain which condition triggered the action. If it cannot, the rule is too vague.
+
+---
+
+## Step 5: Set Allocation, Position Size, and Loss Limits
+
+Broker connectivity makes sizing non-negotiable.
+
+Before live deployment, define:
+
+* Strategy allocation
+* Max position size
+* Max order size
+* Max daily loss
+* Max total drawdown
+* Max open positions
+* Max exposure by asset or sector
+* Whether leverage is allowed
+* What happens when limits are reached
+
+Example framework:
+
+| Risk Control | Example Rule |
+|---|---|
+| Strategy allocation | $5,000 or defined portfolio sleeve |
+| Max position size | 10%–15% of strategy allocation |
+| Max order size | Same as max position size or lower |
+| Max daily loss | 1%–2% of allocation |
+| Max drawdown | 5%–10% of allocation |
+| Max open positions | 3–5 |
+| Leverage | Disabled initially |
+| Limit breach | Pause and alert |
+
+A broker-connected agent should not decide its own allocation. The trader defines the budget; the agent operates inside it.
+
+---
+
+## Step 6: Define Order Types and Execution Rules
+
+**AI-assisted trade execution** needs order-handling rules.
+
+Specify:
+
+* Market orders, limit orders, or both
+* Whether orders can be placed after hours
+* Maximum acceptable slippage
+* Whether partial fills are allowed
+* Whether the agent can cancel and replace orders
+* How long unfilled orders should remain open
+* Whether the agent can average down
+* Whether the agent can scale in or scale out
+
+Conservative execution rules might be:
+
+* Use limit orders by default.
+* Do not trade outside regular market hours.
+* Cancel unfilled orders after a defined time.
+* Do not average down unless explicitly allowed.
+* Do not increase exposure after a loss without approval.
+* Alert on rejected or partial orders.
+
+Execution rules keep the agent from turning a valid signal into a poor fill.
+
+---
+
+## Step 7: Add No-Trade Conditions
+
+No-trade rules tell the agent when to stand down.
+
+Examples:
+
+* Do not trade if market data is stale.
+* Do not trade if the broker connection is unstable.
+* Do not open new positions after max drawdown.
+* Do not trade assets outside the approved universe.
+* Do not place orders if buying power is insufficient.
+* Do not trade during restricted event windows.
+* Do not trade if spreads are too wide.
+* Do not trade if an existing order is pending for the same asset.
+
+No-trade conditions are especially important for broker-connected systems because they prevent automation from forcing action in unsafe conditions.
+
+---
+
+## Step 8: Choose a Broker-Connected Trading Platform
+
+You can build broker connectivity yourself, but that means managing API auth, order routing, account state, error handling, logging, retries, permission scopes, and monitoring.
+
+Most traders should use a platform built for this workflow.
+
+A good broker-connected trading platform should provide:
+
+* Secure broker API connectivity
+* Read-only, paper, and live deployment modes
+* Strategy verification before live trading
+* Explicit allocation and max-loss controls
+* Account and position awareness
+* Order logs and rationale
+* Alerts for fills, rejects, and risk events
+* Human approval checkpoints
+* A kill switch
+
+This is where ScalarField fits naturally.
+
+ScalarField is a Y Combinator-backed agentic AI trading desk that lets traders build, verify, and deploy autonomous AI trading agents through natural language. It integrates with broker APIs so traders can move from a market hypothesis to controlled execution without maintaining brittle scripts or custom infrastructure.
+
+The important phrase is **controlled execution**. ScalarField is not about giving AI unlimited authority. It is about expressing a strategy, defining risk parameters, connecting approved venues, and monitoring the agent’s behavior.
+
+---
+
+## Step 9: Verify the Agent Before Broker Execution
+
+Before the agent can trade, verify that it understood the mandate.
+
+Confirm:
+
+* Strategy objective is correct
+* Approved assets are correct
+* Signals are measurable
+* Risk limits are hard constraints
+* Broker permissions are scoped
+* Order types are defined
+* No-trade rules are enforced
+* Reporting is clear
+* Human approval is required where needed
+* The kill switch is available
+
+Ask:
+
+> “If this agent places an order tomorrow, will I know exactly why it happened?”
+
+If the answer is no, do not connect live execution.
+
+---
+
+## Step 10: Start in Paper Mode
+
+Paper mode tests behavior without risking live capital.
+
+Watch whether the agent:
+
+* Reads account state correctly
+* Detects signals at the right time
+* Sizes orders correctly
+* Applies no-trade rules
+* Handles pending orders safely
+* Reports simulated fills clearly
+* Pauses after risk limits are reached
+* Avoids duplicate trades
+
+Paper trading does not perfectly replicate live execution, but it is essential for verifying the workflow.
+
+A paper agent that violates rules is not ready for live trading, even if simulated P&L looks good.
+
+---
+
+## Step 11: Deploy Live With Small Allocation
+
+Once paper behavior is stable, deploy live with a small allocation.
+
+The first live phase should validate execution quality:
+
+* Fill prices
+* Slippage
+* Order rejects
+* Partial fills
+* Broker latency
+* Alert timing
+* Buying power checks
+* Position updates
+* Risk-limit enforcement
+
+Do not start with full autonomy.
+
+A sensible rollout:
+
+1. Read-only monitoring
+2. Paper trading
+3. Live trading with approval required
+4. Small automated allocation
+5. Gradual scaling after review
+
+The agent should earn trust through observed behavior.
+
+---
+
+## Step 12: Monitor the Agent Like Production Infrastructure
+
+After deployment, your role shifts from manual execution to supervision.
+
+Monitor:
+
+* Open positions
+* Pending orders
+* Recent fills
+* Rejected orders
+* Slippage
+* Daily P&L
+* Drawdown
+* Exposure by asset or sector
+* Rule violations
+* Alert history
+* Broker connection status
+
+A good broker-connected agent should produce a clear audit trail: what it saw, what it checked, what it did, and why.
+
+If you cannot audit it, you should not scale it.
+
+---
+
+## Common Mistakes to Avoid
+
+### Mistake 1: Connecting the Broker Too Early
+
+Do not connect live execution before the strategy and risk policy are verified.
+
+Broker access should follow verification, not precede it.
+
+### Mistake 2: Giving Broad Permissions
+
+The agent should not have permission to trade everything in the account.
+
+Scope access to the strategy.
+
+### Mistake 3: Skipping Max-Loss Rules
+
+Every broker-connected agent needs a drawdown stop.
+
+If the strategy cannot pause, it is not ready.
+
+### Mistake 4: Ignoring Order Handling
+
+Signals are not fills.
+
+Define order types, slippage rules, partial-fill handling, and cancellation logic.
+
+### Mistake 5: Treating the Agent Like a Black Box
+
+A broker-connected agent must be auditable.
+
+Demand logs, rationale, alerts, and position state.
+
+---
+
+## Final Checklist: Broker Connected AI Trading Agent
+
+Before going live, confirm:
+
+* **Mandate:** The agent has one clear strategy objective.
+* **Broker permissions:** Access is scoped tightly.
+* **Universe:** Approved assets are defined.
+* **Signals:** Rules are measurable.
+* **Sizing:** Allocation and order size are capped.
+* **Risk:** Max daily loss and drawdown limits are hard rules.
+* **Execution:** Order types and slippage rules are defined.
+* **No-trade rules:** Unsafe conditions block action.
+* **Verification:** Agent behavior has been reviewed.
+* **Paper test:** Workflow has been tested without live capital.
+* **Monitoring:** Alerts, logs, and reports are enabled.
+* **Kill switch:** The agent can be paused immediately.
+
+If any item is missing, the agent is not ready for live broker execution.
+
+---
+
+## Final Thoughts
+
+A **broker connected AI trading agent** is powerful because it closes the gap between strategy and execution. But that same power makes risk controls non-negotiable.
+
+ScalarField gives traders a practical way to build broker-connected agents through natural language: define the strategy, verify the logic, set risk limits, connect approved broker APIs, and monitor execution. For retail and professional traders, that replaces brittle scripts and emotional clicking with a more disciplined, auditable workflow.
+
+The future is not uncontrolled AI trading. It is human-defined strategy, broker-connected execution, and machine-enforced risk limits operating inside a transparent agentic trading system.
