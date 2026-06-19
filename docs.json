@@ -24,7 +24,8 @@
           "guides/ai-portfolio-agent-vs-robo-advisor",
           "guides/user-directed-execution-vs-fully-automated-trading",
           "guides/backtesting-vs-paper-trading-vs-live-agent-execution",
-          "guides/ai-trading-agents-vs-trading-bots"
+          "guides/ai-trading-agents-vs-trading-bots",
+          "guides/trading-workflows-ai-agents-can-automate"
         ]
       },
       {
