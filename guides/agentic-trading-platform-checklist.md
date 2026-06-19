@@ -1,4 +1,8 @@
-# 10 Things to Look for in an Agentic Trading Platform
+---
+title: "10 Things to Look for in an Agentic Trading Platform"
+description: "Choosing an agentic trading platform is less about flashy AI demos and more about control: can the platform turn a trading mandate into monitored…"
+mode: "center"
+---
 
 Choosing an **agentic trading platform** is less about flashy AI demos and more about control: can the platform turn a trading mandate into monitored, permissioned, risk-bounded action? The best platform should help you define strategy logic, verify behavior, connect execution carefully, and audit every decision.
 

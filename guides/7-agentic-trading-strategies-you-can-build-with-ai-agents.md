@@ -1,4 +1,8 @@
-# 7 Agentic Trading Strategies You Can Build With AI Agents
+---
+title: "7 Agentic Trading Strategies You Can Build With AI Agents"
+description: "Agentic trading strategies are trading systems built around mandates, not just signals. Instead of telling software to “buy when X happens,” the…"
+mode: "center"
+---
 
 **Agentic trading strategies** are trading systems built around mandates, not just signals. Instead of telling software to “buy when X happens,” the trader defines what the agent should monitor, which conditions matter, what risks block action, and when execution requires approval.
 

@@ -1,4 +1,8 @@
-# 7 Reasons AI Trading Agents vs Trading Bots Is the Wrong Comparison
+---
+title: "7 Reasons AI Trading Agents vs Trading Bots Is the Wrong Comparison"
+description: "AI trading agents vs trading bots is usually framed as “new AI tool versus old automation.” That misses the real difference. A trading bot executes…"
+mode: "center"
+---
 
 **AI trading agents vs trading bots** is usually framed as “new AI tool versus old automation.” That misses the real difference. A trading bot executes rules; an **AI trading agent** operates a workflow with context, permissions, risk checks, and reporting.
 

@@ -1,4 +1,8 @@
-# Why Agentic Trading Could Be the Next Big Shift in Markets
+---
+title: "Why Agentic Trading Could Be the Next Big Shift in Markets"
+description: "Agentic trading could become the next major shift in markets because it changes the unit of automation. Instead of automating isolated orders or…"
+mode: "center"
+---
 
 **Agentic trading** could become the next major shift in markets because it changes the unit of automation. Instead of automating isolated orders or static strategies, traders can automate entire decision workflows: observe, reason, check risk, execute, report, and adapt inside defined constraints.
 

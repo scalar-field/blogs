@@ -1,4 +1,8 @@
-# Backtesting vs Paper Trading vs Live Agent Execution
+---
+title: "Backtesting vs Paper Trading vs Live Agent Execution"
+description: "Backtesting vs paper trading is the difference between testing a strategy on historical data and testing its behavior in a simulated live…"
+mode: "center"
+---
 
 **Backtesting vs paper trading** is the difference between testing a strategy on historical data and testing its behavior in a simulated live environment. **Live agent execution** is the next step: allowing an AI trading agent to monitor real conditions and place or prepare trades through a broker-connected workflow.
 

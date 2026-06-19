@@ -1,4 +1,8 @@
-# 7 AI Trading Agent Mistakes Traders Should Avoid
+---
+title: "7 AI Trading Agent Mistakes Traders Should Avoid"
+description: "The biggest AI trading agent mistakes happen when traders automate a weak process instead of improving it. An AI trading agent can monitor markets…"
+mode: "center"
+---
 
 The biggest **AI trading agent mistakes** happen when traders automate a weak process instead of improving it. An **AI trading agent** can monitor markets, apply rules, and reduce emotional execution, but it can also amplify unclear logic, bad data, and loose risk controls.
 

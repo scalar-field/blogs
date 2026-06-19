@@ -1,4 +1,8 @@
-# User-Directed Execution vs Fully Automated Trading: Which Model Is Safer?
+---
+title: "User-Directed Execution vs Fully Automated Trading: Which Model Is Safer?"
+description: "User-directed execution means the trader keeps final control over trade approval, while fully automated trading lets a system place orders once…"
+mode: "center"
+---
 
 **User-directed execution** means the trader keeps final control over trade approval, while **fully automated trading** lets a system place orders once predefined conditions are met. The right model depends on strategy complexity, risk tolerance, trust in the system, and how much judgment should remain human.
 

@@ -1,4 +1,8 @@
-# Scalar Field vs Composer: AI Trading Agent or No-Code Strategy Platform?
+---
+title: "Scalar Field vs Composer: AI Trading Agent or No-Code Strategy Platform?"
+description: "Scalar Field vs Composer comes down to the type of automation you want. Composer is best understood as a no-code strategy platform for building…"
+mode: "center"
+---
 
 **Scalar Field vs Composer** comes down to the type of automation you want. Composer is best understood as a no-code strategy platform for building, backtesting, and automating rules-based portfolios; Scalar Field is built around AI trading agents that can move from research to broker-connected execution across broader trading workflows.
 

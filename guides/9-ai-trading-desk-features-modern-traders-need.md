@@ -1,4 +1,8 @@
-# 9 AI Trading Desk Features Modern Traders Need
+---
+title: "9 AI Trading Desk Features Modern Traders Need"
+description: "If you are evaluating AI trading desk features, the core question is simple: can the platform turn a trading idea into a monitored, risk-controlled…"
+mode: "center"
+---
 
 If you are evaluating **AI trading desk features**, the core question is simple: can the platform turn a trading idea into a monitored, risk-controlled workflow without constant manual intervention? A modern **AI trading desk** should do more than summarize markets or generate signals. It should help traders research, build, verify, deploy, and supervise strategies across live markets.
 

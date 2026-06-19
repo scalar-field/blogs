@@ -333,3 +333,142 @@ html.dark .blog-pill.is-active {
     padding: 1.5rem 1.5rem;
   }
 }
+
+/* ==========================================================================
+   Article (read) page — blog-post.js injects the eyebrow, byline and
+   "More blog posts" section into Mintlify's center-mode layout.
+   ========================================================================== */
+
+/* Replace Mintlify's native section eyebrow, docs pagination and feedback
+   widgets with the blog reading experience. */
+#header .eyebrow {
+  display: none;
+}
+
+#pagination,
+feedback-toolbar {
+  display: none;
+}
+
+.sf-post-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sf-eyebrow-cat {
+  color: var(--blog-tag);
+}
+
+.sf-eyebrow-dot {
+  color: var(--blog-text-muted);
+}
+
+.sf-eyebrow-date {
+  color: var(--blog-text-muted);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.sf-post-byline {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 1.4rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--blog-border);
+}
+
+.sf-post-avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 1px solid var(--blog-border);
+  flex-shrink: 0;
+}
+
+.sf-post-byline-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.sf-post-author {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--blog-text);
+}
+
+.sf-post-sub {
+  font-size: 0.8rem;
+  color: var(--blog-text-muted);
+}
+
+.sf-post-share {
+  margin-left: auto;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid var(--blog-border-strong);
+  background: transparent;
+  color: var(--blog-text-muted);
+  transition: all 0.12s ease;
+}
+
+.sf-post-share:hover {
+  color: var(--blog-text);
+  border-color: var(--blog-text);
+}
+
+.sf-post-share.is-copied {
+  color: #ffffff;
+  background: var(--blog-tag);
+  border-color: var(--blog-tag);
+}
+
+html.dark .sf-post-share.is-copied {
+  color: #0b0d10;
+  background: #e2e8f0;
+  border-color: #e2e8f0;
+}
+
+.sf-related {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--blog-border);
+}
+
+.sf-related-title {
+  margin: 0 0 1.25rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--blog-text);
+}
+
+.sf-related-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 700px) {
+  .sf-related-grid {
+    grid-template-columns: 1fr;
+  }
+  .sf-post-share {
+    margin-left: 0;
+  }
+  .sf-post-byline {
+    flex-wrap: wrap;
+  }
+}

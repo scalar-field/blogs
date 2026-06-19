@@ -1,4 +1,8 @@
-# 5 Trading Workflows AI Agents Can Automate
+---
+title: "5 Trading Workflows AI Agents Can Automate"
+description: "The most useful trading workflows AI agents can automate are not vague “find me trades” prompts. They are repeatable processes where an AI trading…"
+mode: "center"
+---
 
 The most useful **trading workflows AI agents can automate** are not vague “find me trades” prompts. They are repeatable processes where an **AI trading agent** can monitor inputs, apply rules, check risk, and either alert the trader or act within defined permissions.
 

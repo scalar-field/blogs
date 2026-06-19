@@ -1,4 +1,8 @@
-# Best TradingView Alternatives for AI Strategy Building
+---
+title: "Best TradingView Alternatives for AI Strategy Building"
+description: "The best TradingView alternatives for AI strategy building depend on what you want beyond charts: natural-language strategy creation, agentic…"
+mode: "center"
+---
 
 The best **TradingView alternatives** for **AI strategy building** depend on what you want beyond charts: natural-language strategy creation, agentic execution, options research, portfolio automation, or quant-grade backtesting. TradingView remains excellent for charting, Pine Script, alerts, and technical analysis, but it is not always the shortest path from idea to AI-assisted strategy deployment.
 

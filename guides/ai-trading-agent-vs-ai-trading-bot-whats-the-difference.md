@@ -1,4 +1,8 @@
-# AI Trading Agent vs AI Trading Bot: What’s the Difference?
+---
+title: "AI Trading Agent vs AI Trading Bot: What’s the Difference?"
+description: "AI trading agent vs AI trading bot is not just a naming debate. A trading bot usually follows predefined rules, while an AI trading agent can manage…"
+mode: "center"
+---
 
 **AI trading agent vs AI trading bot** is not just a naming debate. A trading bot usually follows predefined rules, while an **AI trading agent** can manage a broader workflow: interpreting instructions, monitoring multiple inputs, checking constraints, and deciding whether to alert, wait, or execute.
 

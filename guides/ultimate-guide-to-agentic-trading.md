@@ -1,4 +1,8 @@
-# The Ultimate Guide to Agentic Trading
+---
+title: "The Ultimate Guide to Agentic Trading"
+description: "Agentic trading is the use of AI agents to turn a trading objective into an observable operating system: watch the market, check the portfolio, apply…"
+mode: "center"
+---
 
 **Agentic trading** is the use of AI agents to turn a trading objective into an observable operating system: watch the market, check the portfolio, apply risk rules, decide, execute or alert, then report what happened. It is not a smarter bot with a new label. It is a different way to run a strategy.
 

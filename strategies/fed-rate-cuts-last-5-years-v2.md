@@ -1,9 +1,8 @@
 ---
 title: "Fed Rate Cuts: The Pivot in Six Moves — V2"
 description: "V2: a short visual read on how the Fed eased policy over the last five years."
+mode: "center"
 ---
-
-# Fed Rate Cuts: The Pivot in Six Moves — V2
 
 The Fed's easing cycle was not a drift — it was a sequence of deliberate steps. Over the last five years, the **upper bound of the target range fell by 175 basis points** across **6 cuts**, moving from the peak-policy era into a measured easing regime.
 

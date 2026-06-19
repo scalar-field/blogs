@@ -1,4 +1,8 @@
-# AI Portfolio Agent vs Robo Advisor: What’s the Difference?
+---
+title: "AI Portfolio Agent vs Robo Advisor: What’s the Difference?"
+description: "An AI portfolio agent and a robo advisor both automate parts of investing, but they are built for different jobs. A robo advisor usually manages a…"
+mode: "center"
+---
 
 An **AI portfolio agent** and a **robo advisor** both automate parts of investing, but they are built for different jobs. A robo advisor usually manages a diversified allocation based on risk tolerance, while an AI portfolio agent can monitor markets, portfolio state, strategy rules, and risk conditions in a more active workflow.
 

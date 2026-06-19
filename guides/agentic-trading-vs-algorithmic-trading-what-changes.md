@@ -1,4 +1,8 @@
-# Agentic Trading vs Algorithmic Trading: What Changes?
+---
+title: "Agentic Trading vs Algorithmic Trading: What Changes?"
+description: "Agentic trading vs algorithmic trading comes down to the difference between executing predefined rules and delegating a monitored workflow to an AI…"
+mode: "center"
+---
 
 **Agentic trading vs algorithmic trading** comes down to the difference between executing predefined rules and delegating a monitored workflow to an AI agent. Algorithmic trading is built around coded instructions. Agentic trading adds a layer that can interpret goals, monitor changing inputs, manage tasks, and operate within trader-defined constraints.
 

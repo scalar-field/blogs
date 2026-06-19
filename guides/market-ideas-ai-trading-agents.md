@@ -1,4 +1,8 @@
-# 11 Market Ideas AI Trading Agents Can Turn Into Strategies
+---
+title: "11 Market Ideas AI Trading Agents Can Turn Into Strategies"
+description: "The best market ideas AI trading agents can handle are not vague predictions. They are specific, testable concepts that can be converted into rules…"
+mode: "center"
+---
 
 The best **market ideas AI trading agents** can handle are not vague predictions. They are specific, testable concepts that can be converted into rules, monitored over time, and evaluated through **market hypothesis testing** before any real execution.
 

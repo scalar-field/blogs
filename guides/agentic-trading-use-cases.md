@@ -1,4 +1,8 @@
-# 10 Agentic Trading Use Cases Every Trader Should Know
+---
+title: "10 Agentic Trading Use Cases Every Trader Should Know"
+description: "Agentic trading use cases are the practical trading workflows where AI agents can monitor conditions, apply rules, and take bounded action without…"
+mode: "center"
+---
 
 **Agentic trading use cases** are the practical trading workflows where AI agents can monitor conditions, apply rules, and take bounded action without forcing a trader to babysit every screen. The point is not to let AI improvise trades; it is to automate repeatable market operations with risk controls.
 
