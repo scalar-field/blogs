@@ -23,7 +23,8 @@
           "guides/tradingview-alternatives-ai-strategy-building",
           "guides/ai-portfolio-agent-vs-robo-advisor",
           "guides/user-directed-execution-vs-fully-automated-trading",
-          "guides/backtesting-vs-paper-trading-vs-live-agent-execution"
+          "guides/backtesting-vs-paper-trading-vs-live-agent-execution",
+          "guides/ai-trading-agents-vs-trading-bots"
         ]
       },
       {
