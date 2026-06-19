@@ -22,7 +22,8 @@
           "guides/why-agentic-trading-next-big-shift",
           "guides/tradingview-alternatives-ai-strategy-building",
           "guides/ai-portfolio-agent-vs-robo-advisor",
-          "guides/user-directed-execution-vs-fully-automated-trading"
+          "guides/user-directed-execution-vs-fully-automated-trading",
+          "guides/backtesting-vs-paper-trading-vs-live-agent-execution"
         ]
       },
       {
