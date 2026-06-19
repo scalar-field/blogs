@@ -2,14 +2,244 @@
 title: "Scalar Field Blog"
 sidebarTitle: "Overview"
 description: "Research notes, strategy write-ups, and insights from the Scalar Field quantitative trading platform."
+mode: "custom"
 ---
 
-# Scalar Field Blog
+<div className="blog-wrap">
 
-Research notes, strategy write-ups, and insights from the Scalar Field team. Each post covers the methodology, configuration, and live results behind our systematic trading strategies.
+<div className="blog-head">
+  <h1>Scalar Field Blog</h1>
+  <p>Research notes, strategy write-ups, and insights on building systematic, agentic trading strategies.</p>
+</div>
 
-<CardGroup cols={2}>
-  <Card title="Benjamin Graham NCAV/MV Strategy" icon="https://mintlify.s3.us-west-1.amazonaws.com/polymarket-292d1b1b/images/icons/nav/chart.svg" href="/strategies/ncav-strategy">
-    A Graham-inspired net current asset value strategy for selecting balance-sheet-strong S&P 500 stocks.
-  </Card>
-</CardGroup>
+{/* ---- Featured / hero post ---- */}
+<a href="/strategies/ncav-strategy" className="blog-hero">
+  <div className="blog-hero-media">
+    <span className="blog-badge">Strategy</span>
+  </div>
+  <div className="blog-hero-body">
+    <span className="blog-card-tag">Strategies</span>
+    <h2>Benjamin Graham NCAV/MV Strategy</h2>
+    <p>A Graham-inspired net current asset value strategy for selecting balance-sheet-strong S&amp;P 500 stocks.</p>
+    <div className="blog-meta">
+      <img className="blog-avatar" src="https://imagedelivery.net/MPdwyYSWT8IY7lxgN3x3Uw/831bd9b7-78f7-4d06-7380-44809b816500/thumbnail" alt="Scalar Field" />
+      <div className="blog-author">
+        <span className="name">Scalar Field</span>
+        <span className="sub">Jun 11, 2026 · 8 min read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+{/* ---- Category pills (static) ---- */}
+<div className="blog-pills">
+  <span className="blog-pill is-active">All articles</span>
+  <a href="#strategies" className="blog-pill">Strategies</a>
+  <a href="#how-to" className="blog-pill">How to</a>
+</div>
+
+{/* ---- Strategies ---- */}
+<p className="blog-section-label" id="strategies">Strategies</p>
+<div className="blog-grid">
+
+  <a href="/strategies/ncav-strategy" className="blog-card">
+    <div className="blog-card-media grad-2"></div>
+    <div className="blog-card-body">
+      <span className="blog-card-tag">Strategies</span>
+      <h3>Benjamin Graham NCAV/MV Strategy</h3>
+      <p>A Graham-inspired net current asset value strategy for selecting balance-sheet-strong S&amp;P 500 stocks.</p>
+      <div className="blog-meta">
+        <img className="blog-avatar" src="https://imagedelivery.net/MPdwyYSWT8IY7lxgN3x3Uw/831bd9b7-78f7-4d06-7380-44809b816500/thumbnail" alt="Scalar Field" />
+        <div className="blog-author">
+          <span className="name">Scalar Field</span>
+          <span className="sub">Jun 11, 2026 · 8 min read</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <a href="/strategies/fed-rate-cuts-last-5-years-v2" className="blog-card">
+    <div className="blog-card-media grad-3"></div>
+    <div className="blog-card-body">
+      <span className="blog-card-tag">Strategies</span>
+      <h3>Fed Rate Cuts: The Pivot in Six Moves — V2</h3>
+      <p>A short visual read on how the Fed eased policy over the last five years.</p>
+      <div className="blog-meta">
+        <img className="blog-avatar" src="https://imagedelivery.net/MPdwyYSWT8IY7lxgN3x3Uw/831bd9b7-78f7-4d06-7380-44809b816500/thumbnail" alt="Scalar Field" />
+        <div className="blog-author">
+          <span className="name">Scalar Field</span>
+          <span className="sub">4 min read</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+</div>
+
+{/* ---- How to ---- */}
+<p className="blog-section-label" id="how-to">How to</p>
+<div className="blog-grid">
+
+  <a href="/guides/build-ai-trading-agent-no-code" className="blog-card">
+    <div className="blog-card-media grad-1"></div>
+    <div className="blog-card-body">
+      <span className="blog-card-tag">How to</span>
+      <h3>Build an AI Trading Agent Without Writing Code</h3>
+      <p>Define the trading objective, translate it into plain-English rules, set risk limits, connect a broker, and deploy with monitoring.</p>
+      <div className="blog-meta">
+        <img className="blog-avatar" src="https://imagedelivery.net/MPdwyYSWT8IY7lxgN3x3Uw/831bd9b7-78f7-4d06-7380-44809b816500/thumbnail" alt="Scalar Field" />
+        <div className="blog-author">
+          <span className="name">Scalar Field</span>
+          <span className="sub">Jun 18, 2026 · 7 min read</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <a href="/guides/create-your-own-ai-trading-agent" className="blog-card">
+    <div className="blog-card-media grad-4"></div>
+    <div className="blog-card-body">
+      <span className="blog-card-tag">How to</span>
+      <h3>Create Your Own AI Trading Agent</h3>
+      <p>Define a trading objective, translate it into measurable rules, and turn an idea into a risk-bounded autonomous agent.</p>
+      <div className="blog-meta">
+        <img className="blog-avatar" src="https://imagedelivery.net/MPdwyYSWT8IY7lxgN3x3Uw/831bd9b7-78f7-4d06-7380-44809b816500/thumbnail" alt="Scalar Field" />
+        <div className="blog-author">
+          <span className="name">Scalar Field</span>
+          <span className="sub">Jun 18, 2026 · 7 min read</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <a href="/guides/build-agentic-trading-strategy-from-scratch" className="blog-card">
+    <div className="blog-card-media grad-3"></div>
+    <div className="blog-card-body">
+      <span className="blog-card-tag">How to</span>
+      <h3>Build an Agentic Trading Strategy From Scratch</h3>
+      <p>An agentic strategy does more than trigger static buy and sell rules — build one end to end.</p>
+      <div className="blog-meta">
+        <img className="blog-avatar" src="https://imagedelivery.net/MPdwyYSWT8IY7lxgN3x3Uw/831bd9b7-78f7-4d06-7380-44809b816500/thumbnail" alt="Scalar Field" />
+        <div className="blog-author">
+          <span className="name">Scalar Field</span>
+          <span className="sub">Jun 18, 2026 · 8 min read</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <a href="/guides/turn-market-thesis-into-trading-agent" className="blog-card">
+    <div className="blog-card-media grad-2"></div>
+    <div className="blog-card-body">
+      <span className="blog-card-tag">How to</span>
+      <h3>Turn a Market Thesis Into a Trading Agent</h3>
+      <p>Convert an investment idea into measurable rules, risk limits, execution permissions, and monitoring.</p>
+      <div className="blog-meta">
+        <img className="blog-avatar" src="https://imagedelivery.net/MPdwyYSWT8IY7lxgN3x3Uw/831bd9b7-78f7-4d06-7380-44809b816500/thumbnail" alt="Scalar Field" />
+        <div className="blog-author">
+          <span className="name">Scalar Field</span>
+          <span className="sub">Jun 18, 2026 · 6 min read</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <a href="/guides/build-trading-strategy-plain-english" className="blog-card">
+    <div className="blog-card-media grad-1"></div>
+    <div className="blog-card-body">
+      <span className="blog-card-tag">How to</span>
+      <h3>Build a Trading Strategy Using Plain English</h3>
+      <p>Describe your market idea in measurable terms: what to trade, when to enter, when to exit, and how much.</p>
+      <div className="blog-meta">
+        <img className="blog-avatar" src="https://imagedelivery.net/MPdwyYSWT8IY7lxgN3x3Uw/831bd9b7-78f7-4d06-7380-44809b816500/thumbnail" alt="Scalar Field" />
+        <div className="blog-author">
+          <span className="name">Scalar Field</span>
+          <span className="sub">Jun 18, 2026 · 6 min read</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <a href="/guides/backtest-trading-strategy-with-ai" className="blog-card">
+    <div className="blog-card-media grad-4"></div>
+    <div className="blog-card-body">
+      <span className="blog-card-tag">How to</span>
+      <h3>Backtest a Trading Strategy With AI</h3>
+      <p>Define a clear hypothesis, convert it into measurable rules, and test those rules on historical data.</p>
+      <div className="blog-meta">
+        <img className="blog-avatar" src="https://imagedelivery.net/MPdwyYSWT8IY7lxgN3x3Uw/831bd9b7-78f7-4d06-7380-44809b816500/thumbnail" alt="Scalar Field" />
+        <div className="blog-author">
+          <span className="name">Scalar Field</span>
+          <span className="sub">Jun 18, 2026 · 7 min read</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <a href="/guides/build-ai-options-trading-agent" className="blog-card">
+    <div className="blog-card-media grad-3"></div>
+    <div className="blog-card-body">
+      <span className="blog-card-tag">How to</span>
+      <h3>Build an AI Options Trading Agent</h3>
+      <p>Options trading agents need more than a signal generator — model contracts, greeks, and risk together.</p>
+      <div className="blog-meta">
+        <img className="blog-avatar" src="https://imagedelivery.net/MPdwyYSWT8IY7lxgN3x3Uw/831bd9b7-78f7-4d06-7380-44809b816500/thumbnail" alt="Scalar Field" />
+        <div className="blog-author">
+          <span className="name">Scalar Field</span>
+          <span className="sub">Jun 18, 2026 · 8 min read</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <a href="/guides/backtest-options-strategies-beyond-spy-qqq" className="blog-card">
+    <div className="blog-card-media grad-2"></div>
+    <div className="blog-card-body">
+      <span className="blog-card-tag">How to</span>
+      <h3>Backtest Options Strategies Beyond SPY and QQQ</h3>
+      <p>Go beyond a generic index-options backtester to test strategies across a broader options universe.</p>
+      <div className="blog-meta">
+        <img className="blog-avatar" src="https://imagedelivery.net/MPdwyYSWT8IY7lxgN3x3Uw/831bd9b7-78f7-4d06-7380-44809b816500/thumbnail" alt="Scalar Field" />
+        <div className="blog-author">
+          <span className="name">Scalar Field</span>
+          <span className="sub">Jun 18, 2026 · 7 min read</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <a href="/guides/build-broker-connected-ai-trading-agent" className="blog-card">
+    <div className="blog-card-media grad-1"></div>
+    <div className="blog-card-body">
+      <span className="blog-card-tag">How to</span>
+      <h3>Build a Broker-Connected AI Trading Agent</h3>
+      <p>An autonomous system that monitors markets, applies strategy rules, enforces risk limits, and sends orders.</p>
+      <div className="blog-meta">
+        <img className="blog-avatar" src="https://imagedelivery.net/MPdwyYSWT8IY7lxgN3x3Uw/831bd9b7-78f7-4d06-7380-44809b816500/thumbnail" alt="Scalar Field" />
+        <div className="blog-author">
+          <span className="name">Scalar Field</span>
+          <span className="sub">Jun 18, 2026 · 8 min read</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <a href="/guides/move-from-backtest-to-live-strategy" className="blog-card">
+    <div className="blog-card-media grad-4"></div>
+    <div className="blog-card-body">
+      <span className="blog-card-tag">How to</span>
+      <h3>Move From Backtest to Live Strategy With AI Agents</h3>
+      <p>Convert historical research into a controlled execution workflow: verified rules, realistic assumptions, paper, then live.</p>
+      <div className="blog-meta">
+        <img className="blog-avatar" src="https://imagedelivery.net/MPdwyYSWT8IY7lxgN3x3Uw/831bd9b7-78f7-4d06-7380-44809b816500/thumbnail" alt="Scalar Field" />
+        <div className="blog-author">
+          <span className="name">Scalar Field</span>
+          <span className="sub">Jun 18, 2026 · 7 min read</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+</div>
+
+</div>
