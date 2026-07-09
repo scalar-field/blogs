@@ -162,8 +162,12 @@
         el.addEventListener("click", function (e) {
           if (kind === "linkedin") {
             e.preventDefault();
+            // The share-offsite dialog only scrapes Open Graph tags from a
+            // public URL, so it shows nothing on localhost/private previews.
+            // The feed composer accepts editable `text`, prefilling reliably.
             window.open(
-              "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(url),
+              "https://www.linkedin.com/feed/?shareActive=true&text=" +
+                encodeURIComponent(title + "\n\n" + url),
               "_blank",
               "noopener",
             );
@@ -330,11 +334,7 @@
     var cards = list
       .map(function (p) {
         var media = p.image
-          ? '<div class="blog-card-media"><img src="' +
-            esc(p.image) +
-            '" alt="' +
-            esc(p.title) +
-            '" /></div>'
+          ? '<div class="blog-card-media"><img src="' + esc(p.image) + '" alt="' + esc(p.title) + '" /></div>'
           : '<div class="blog-card-media ' + gradFor(p.path) + '"></div>';
         return (
           '<a class="blog-card" href="' +
