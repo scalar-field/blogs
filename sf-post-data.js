@@ -10,7 +10,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 6,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jun%2026,%202026,%2002_37_35%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/ultimate-guide-to-agentic-trading.png"
     },
     {
       "path": "/guides/agentic-trading-use-cases",
@@ -19,7 +19,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 4,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jun%2026,%202026,%2002_54_50%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/agentic-trading-use-cases.png"
     },
     {
       "path": "/guides/agentic-trading-platform-checklist",
@@ -28,7 +28,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 4,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jun%2026,%202026,%2003_11_55%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/agentic-trading-platform-checklist.png"
     },
     {
       "path": "/guides/scalar-field-vs-composer",
@@ -37,7 +37,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 6,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2002_48_48%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/scalar-field-vs-composer.png"
     },
     {
       "path": "/guides/why-agentic-trading-next-big-shift",
@@ -46,7 +46,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 6,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2002_49_12%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/why-agentic-trading-next-big-shift.png"
     },
     {
       "path": "/guides/tradingview-alternatives-ai-strategy-building",
@@ -55,7 +55,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 6,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2002_49_16%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/tradingview-alternatives-ai-strategy-building.png"
     },
     {
       "path": "/guides/ai-portfolio-agent-vs-robo-advisor",
@@ -64,7 +64,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 7,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2002_56_27%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/ai-portfolio-agent-vs-robo-advisor.png"
     },
     {
       "path": "/guides/user-directed-execution-vs-fully-automated-trading",
@@ -73,7 +73,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 6,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_18_02%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/user-directed-execution-vs-fully-automated-trading.png"
     },
     {
       "path": "/guides/backtesting-vs-paper-trading-vs-live-agent-execution",
@@ -82,7 +82,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 6,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2004_05_27%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/backtesting-vs-paper-trading-vs-live-agent-execution.png"
     },
     {
       "path": "/guides/ai-trading-agents-vs-trading-bots",
@@ -91,7 +91,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 6,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2004_06_13%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/ai-trading-agents-vs-trading-bots.png"
     },
     {
       "path": "/guides/trading-workflows-ai-agents-can-automate",
@@ -100,7 +100,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 6,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2004_07_01%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/trading-workflows-ai-agents-can-automate.png"
     },
     {
       "path": "/guides/market-ideas-ai-trading-agents",
@@ -109,7 +109,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 6,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_16_26%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/market-ideas-ai-trading-agents.png"
     },
     {
       "path": "/guides/agentic-trading-strategies",
@@ -118,7 +118,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 6,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_16_45%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/agentic-trading-strategies.png"
     },
     {
       "path": "/guides/9-ai-trading-desk-features-modern-traders-need",
@@ -127,7 +127,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 7,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_16_53%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/9-ai-trading-desk-features-modern-traders-need.png"
     },
     {
       "path": "/guides/5-ways-to-use-ai-for-strategy-backtesting",
@@ -136,7 +136,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 7,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_16_59%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/5-ways-to-use-ai-for-strategy-backtesting.png"
     },
     {
       "path": "/guides/9-options-strategies-you-can-backtest-with-ai",
@@ -145,7 +145,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 7,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_17_05%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/9-options-strategies-you-can-backtest-with-ai.png"
     },
     {
       "path": "/guides/7-mistakes-traders-make-when-building-ai-trading-agents",
@@ -154,7 +154,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 7,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_17_11%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/7-mistakes-traders-make-when-building-ai-trading-agents.png"
     },
     {
       "path": "/guides/agentic-trading-vs-algorithmic-trading-what-changes",
@@ -163,7 +163,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 8,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_17_16%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/agentic-trading-vs-algorithmic-trading-what-changes.png"
     },
     {
       "path": "/guides/ai-trading-agent-vs-ai-trading-bot-whats-the-difference",
@@ -172,7 +172,7 @@ window.__SF_BLOG = {
       "slug": "insights",
       "date": "",
       "readTime": 8,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_17_24%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/ai-trading-agent-vs-ai-trading-bot-whats-the-difference.png"
     },
     {
       "path": "/strategies/ncav-strategy",
@@ -181,7 +181,7 @@ window.__SF_BLOG = {
       "slug": "strategies",
       "date": "Jun 11, 2026",
       "readTime": 4,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jun%2025,%202026,%2010_06_53%20AM.png?updatedAt=1782362226225"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/ncav-strategy.png"
     },
     {
       "path": "/strategies/fed-rate-cuts-last-5-years-v2",
@@ -190,7 +190,7 @@ window.__SF_BLOG = {
       "slug": "strategies",
       "date": "",
       "readTime": 2,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_17_45%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/fed-rate-cuts-last-5-years-v2.png"
     },
     {
       "path": "/guides/build-ai-trading-agent-no-code",
@@ -199,7 +199,7 @@ window.__SF_BLOG = {
       "slug": "how-to",
       "date": "Jun 18, 2026",
       "readTime": 13,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_17_50%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/build-ai-trading-agent-no-code.png"
     },
     {
       "path": "/guides/create-your-own-ai-trading-agent",
@@ -208,7 +208,7 @@ window.__SF_BLOG = {
       "slug": "how-to",
       "date": "Jun 18, 2026",
       "readTime": 14,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_17_56%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/create-your-own-ai-trading-agent.png"
     },
     {
       "path": "/guides/build-agentic-trading-strategy-from-scratch",
@@ -217,7 +217,7 @@ window.__SF_BLOG = {
       "slug": "how-to",
       "date": "Jun 18, 2026",
       "readTime": 13,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_18_14%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/build-agentic-trading-strategy-from-scratch.png"
     },
     {
       "path": "/guides/turn-market-thesis-into-trading-agent",
@@ -226,7 +226,7 @@ window.__SF_BLOG = {
       "slug": "how-to",
       "date": "Jun 18, 2026",
       "readTime": 14,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_18_17%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/turn-market-thesis-into-trading-agent.png"
     },
     {
       "path": "/guides/build-trading-strategy-plain-english",
@@ -235,7 +235,7 @@ window.__SF_BLOG = {
       "slug": "how-to",
       "date": "Jun 18, 2026",
       "readTime": 12,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_18_23%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/build-trading-strategy-plain-english.png"
     },
     {
       "path": "/guides/backtest-trading-strategy-with-ai",
@@ -244,7 +244,7 @@ window.__SF_BLOG = {
       "slug": "how-to",
       "date": "Jun 18, 2026",
       "readTime": 12,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_18_28%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/backtest-trading-strategy-with-ai.png"
     },
     {
       "path": "/guides/build-ai-options-trading-agent",
@@ -253,7 +253,7 @@ window.__SF_BLOG = {
       "slug": "how-to",
       "date": "Jun 18, 2026",
       "readTime": 14,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_18_32%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/build-ai-options-trading-agent.png"
     },
     {
       "path": "/guides/backtest-options-strategies-beyond-spy-qqq",
@@ -262,7 +262,7 @@ window.__SF_BLOG = {
       "slug": "how-to",
       "date": "Jun 18, 2026",
       "readTime": 13,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_18_36%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/backtest-options-strategies-beyond-spy-qqq.png"
     },
     {
       "path": "/guides/build-broker-connected-ai-trading-agent",
@@ -271,7 +271,7 @@ window.__SF_BLOG = {
       "slug": "how-to",
       "date": "Jun 18, 2026",
       "readTime": 12,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_20_46%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/build-broker-connected-ai-trading-agent.png"
     },
     {
       "path": "/guides/move-from-backtest-to-live-strategy",
@@ -280,7 +280,7 @@ window.__SF_BLOG = {
       "slug": "how-to",
       "date": "Jun 18, 2026",
       "readTime": 11,
-      "image": "https://ik.imagekit.io/j4fkbios2/ChatGPT%20Image%20Jul%208,%202026,%2008_23_40%20PM.png"
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/move-from-backtest-to-live-strategy.png"
     }
   ]
 };

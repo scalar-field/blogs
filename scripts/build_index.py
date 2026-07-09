@@ -28,138 +28,15 @@ POST_DATA_JS = os.path.join(ROOT, "sf-post-data.js")
 AVATAR = "/favicon.svg"
 AUTHOR = "Scalar Field"
 FEATURED = "strategies/ncav-strategy"
-FEATURED_IMAGE = (
-    "https://ik.imagekit.io/j4fkbios2/"
-    "ChatGPT%20Image%20Jun%2025,%202026,%2010_06_53%20AM.png"
-    "?updatedAt=1782362226225"
-)
-GRADIENTS = ["grad-1", "grad-2", "grad-3", "grad-4"]
+CARD_IMAGE_BASE = "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/"
 
-# Per-post card artwork. Keys are page refs (no extension); when present the
-# card renders this image instead of a gradient placeholder.
-CARD_IMAGES = {
-    "guides/ultimate-guide-to-agentic-trading": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jun%2026,%202026,%2002_37_35%20PM.png"
-    ),
-    "guides/agentic-trading-use-cases": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jun%2026,%202026,%2002_54_50%20PM.png"
-    ),
-    "guides/agentic-trading-platform-checklist": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jun%2026,%202026,%2003_11_55%20PM.png"
-    ),
-    "guides/why-agentic-trading-next-big-shift": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2002_49_12%20PM.png"
-    ),
-    "guides/scalar-field-vs-composer": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2002_48_48%20PM.png"
-    ),
-    "guides/tradingview-alternatives-ai-strategy-building": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2002_49_16%20PM.png"
-    ),
-    "guides/ai-portfolio-agent-vs-robo-advisor": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2002_56_27%20PM.png"
-    ),
-    "guides/backtesting-vs-paper-trading-vs-live-agent-execution": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2004_05_27%20PM.png"
-    ),
-    "guides/ai-trading-agents-vs-trading-bots": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2004_06_13%20PM.png"
-    ),
-    "guides/trading-workflows-ai-agents-can-automate": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2004_07_01%20PM.png"
-    ),
-    "guides/move-from-backtest-to-live-strategy": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_23_40%20PM.png"
-    ),
-    "guides/build-broker-connected-ai-trading-agent": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_20_46%20PM.png"
-    ),
-    "guides/backtest-options-strategies-beyond-spy-qqq": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_18_36%20PM.png"
-    ),
-    "guides/build-ai-options-trading-agent": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_18_32%20PM.png"
-    ),
-    "guides/backtest-trading-strategy-with-ai": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_18_28%20PM.png"
-    ),
-    "guides/build-trading-strategy-plain-english": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_18_23%20PM.png"
-    ),
-    "guides/turn-market-thesis-into-trading-agent": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_18_17%20PM.png"
-    ),
-    "guides/build-agentic-trading-strategy-from-scratch": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_18_14%20PM.png"
-    ),
-    "guides/user-directed-execution-vs-fully-automated-trading": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_18_02%20PM.png"
-    ),
-    "guides/create-your-own-ai-trading-agent": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_17_56%20PM.png"
-    ),
-    "guides/build-ai-trading-agent-no-code": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_17_50%20PM.png"
-    ),
-    "strategies/fed-rate-cuts-last-5-years-v2": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_17_45%20PM.png"
-    ),
-    "guides/ai-trading-agent-vs-ai-trading-bot-whats-the-difference": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_17_24%20PM.png"
-    ),
-    "guides/agentic-trading-vs-algorithmic-trading-what-changes": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_17_16%20PM.png"
-    ),
-    "guides/7-mistakes-traders-make-when-building-ai-trading-agents": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_17_11%20PM.png"
-    ),
-    "guides/9-options-strategies-you-can-backtest-with-ai": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_17_05%20PM.png"
-    ),
-    "guides/5-ways-to-use-ai-for-strategy-backtesting": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_16_59%20PM.png"
-    ),
-    "guides/9-ai-trading-desk-features-modern-traders-need": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_16_53%20PM.png"
-    ),
-    "guides/agentic-trading-strategies": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_16_45%20PM.png"
-    ),
-    "guides/market-ideas-ai-trading-agents": (
-        "https://ik.imagekit.io/j4fkbios2/"
-        "ChatGPT%20Image%20Jul%208,%202026,%2008_16_26%20PM.png"
-    ),
-    "strategies/ncav-strategy": FEATURED_IMAGE,
-}
+
+def card_image(page_ref):
+    """Card/hero artwork URL from the page slug: blogs/{slug}.png."""
+    return CARD_IMAGE_BASE + page_ref.rsplit("/", 1)[-1] + ".png"
+
+
+FEATURED_IMAGE = card_image(FEATURED)
 
 # Map docs.json group names to landing-page category label + filter slug.
 CATEGORY = {
@@ -359,15 +236,12 @@ def hero(post, label):
     )
 
 
-def card(page_ref, post, label, slug, grad):
-    image = CARD_IMAGES.get(page_ref)
-    if image:
-        media = (
-            f'    <div className="blog-card-media">'
-            f'<img src="{image}" alt="{esc(post["title"])}" /></div>\n'
-        )
-    else:
-        media = f'    <div className="blog-card-media {grad}"></div>\n'
+def card(page_ref, post, label, slug):
+    image = card_image(page_ref)
+    media = (
+        f'    <div className="blog-card-media">'
+        f'<img src="{image}" alt="{esc(post["title"])}" /></div>\n'
+    )
     return (
         f'  <a href="/{page_ref}" className="blog-card" data-category="{slug}">\n'
         f'{media}'
@@ -394,8 +268,8 @@ def write_index(entries, posts, categories):
         )
 
     cards = [
-        card(ref, posts[ref], label, slug, GRADIENTS[i % len(GRADIENTS)])
-        for i, (ref, label, slug) in enumerate(entries)
+        card(ref, posts[ref], label, slug)
+        for ref, label, slug in entries
     ]
 
     out = [
@@ -445,7 +319,7 @@ def write_post_data(entries, posts):
             "slug": slug,
             "date": fmt_date(post["date"]),
             "readTime": post["read_time"],
-            "image": CARD_IMAGES.get(ref, ""),
+            "image": card_image(ref),
         })
     payload = {"author": AUTHOR, "avatar": AVATAR, "posts": records}
     body = (
