@@ -1,0 +1,266 @@
+---
+title: "How to Connect Alpaca on Scalar Field"
+description: "Connecting Alpaca on Scalar Field takes about a minute: accept the disclosures and authorize over OAuth. Paper and live are separate connections that share..."
+date: "2026-07-29"
+mode: "center"
+---
+
+**Connecting Alpaca on Scalar Field** gives your agents a US brokerage account for equities, ETFs, and options — and, unusually, it gives you two of them. **Alpaca Paper** is a simulated account with no real money in it. **Alpaca Live** is your real brokerage account. They are separate connections, but they behave identically, so strategy code verified on paper runs unchanged against live.
+
+That is the reason to connect paper first. You can watch an agent operate for a week, confirm it does what you expected, and then point the same code at the live account by changing one argument.
+
+**What you'll learn:**
+
+* How the Alpaca connection works, and why paper and live connect separately
+* What you need before you start
+* How to accept the disclosures and authorize over OAuth
+* How to verify equity, buying power, positions, and orders after connecting
+* What the margin toggle changes about what your agents can spend
+* How orders behave, how to troubleshoot, and how to disconnect
+
+---
+
+## How the Alpaca Connection Works
+
+Scalar Field connects to Alpaca over **OAuth**. You log in on Alpaca's own site, and Alpaca returns a scoped authorization code that Scalar Field exchanges for a token on the server. Your Alpaca credentials are never shared with or stored by Scalar Field.
+
+Two things this flow does *not* involve are worth stating plainly, because Alpaca is often integrated the other way around. There are **no API keys to copy** — you never open Alpaca's dashboard to generate a key pair or paste a secret anywhere. And there is **no browser extension** to install, unlike the Robinhood connection. It is a login in a popup window, and nothing else.
+
+| Specification | Value |
+|---|---|
+| Instruments | US equities, ETFs, and options |
+| Accounts | `ALPACA_PAPER` and `ALPACA_LIVE`, connected separately |
+| Connection type | OAuth in a popup window |
+| Options symbols | OPRA/OSI format, with a 100 multiplier |
+| Fractional shares | Supported for equities |
+| Fill model | Asynchronous — an order can sit as `PENDING` before it fills |
+| Trading hours | US market hours; off-hours orders queue for the next open |
+| Quotes | Last, bid, ask, and volume — no order-book depth |
+| Margin | Supported, and off until you enable it |
+| Currency | USD |
+| Credentials | Never collected or stored by Scalar Field |
+
+---
+
+## Paper or Live: Which to Connect
+
+Both, eventually. They appear as two separate cards, link through two separate handshakes, and get their own portfolio pages. Connecting one has no effect on the other, and disconnecting one leaves the other running.
+
+| | Alpaca Paper | Alpaca Live |
+|---|---|---|
+| Card title | **Alpaca Paper Trading** | **Alpaca Live Trading** |
+| Badge | Paper Trading | Live Trading |
+| Money at risk | None — simulated fills | Real |
+| Portfolio page | `/portfolio/alpaca-paper` | `/portfolio/alpaca-live` |
+| Account name in code | `ALPACA_PAPER` | `ALPACA_LIVE` |
+| Extra disclosure | — | Risk of Loss |
+
+The sensible order is paper first, live once the strategy has earned it. Paper fills are simulated, so buying power, fill prices, and performance can differ from live conditions — the paper disclosure says so explicitly. Treat paper as a correctness check on your agent's behavior, not as a forecast of its returns.
+
+---
+
+## Before You Start
+
+| Requirement | Why It Matters |
+|---|---|
+| An Alpaca account | You authorize on Alpaca's own login page; one Alpaca login covers both paper and live |
+| Popups allowed for `scalarfield.io` | The handshake opens in a popup; if it's blocked, Scalar Field falls back to a full-page redirect |
+| A funded live account, for live only | Paper needs no funding to be useful |
+| About one minute | Per connection, assuming you are already logged in to Alpaca |
+
+There is no desktop-only restriction and no supported-browser list here. Because nothing depends on an extension, the popup flow works in any modern browser, and the same-tab fallback covers the case where popups are blocked entirely.
+
+---
+
+## Step 1: Open Your Portfolio
+
+Sign in to Scalar Field and click **Portfolio** in the left sidebar, or go directly to `scalarfield.io/portfolio`.
+
+Scroll to the **Connect More** section, headed "Add exchanges, brokerages, and trading venues." Every available venue lives here.
+
+![The Connect More section on the Scalar Field portfolio page](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-alpaca-01-portfolio-connect-more.png)
+
+---
+
+## Step 2: Click Connect on the Alpaca Card
+
+You will see two Alpaca cards, each with its own **Connect** button:
+
+* **Alpaca Paper Trading**, described as "Practice trading with a paper account — no real money at risk," carrying a **Paper Trading** badge.
+* **Alpaca Live Trading**, described as "Connect your Alpaca live account for real-money stock, ETF, and options trading," carrying a **Live Trading** badge.
+
+Click **Connect** on the one you want. Each opens its own disclosures modal, and the two flows are independent from this point on. Once a card is connected it disappears from **Connect More** and reappears under **Your Venues** — which is why you may only see one Alpaca card here.
+
+![The Alpaca Live Trading card with its Live Trading badge and Connect button](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-alpaca-02-alpaca-cards.png)
+
+---
+
+## Step 3: Review and Accept the Disclosures
+
+The modal is headed **Alpaca paper trading** or **Alpaca live trading**, with the subtitle "Review and acknowledge before connecting your Alpaca paper account" or "...your Alpaca live brokerage account." Under a **Disclosures** label, it explains what you are about to authorize.
+
+![The Alpaca live trading disclosures modal as it opens](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-alpaca-03-live-disclosures.png)
+
+The disclosures sit in a single scrollable panel, and only the first two are visible at rest. Scroll the panel to read the rest — on the live modal, the **Risk of Loss** section is below the fold.
+
+Both modes carry the same two core disclosures:
+
+| Disclosure | What It Says |
+|---|---|
+| What you are authorizing | You are authorizing Scalar Field to redirect you to Alpaca to connect the account. Use of Alpaca remains subject to Alpaca's terms and policies, and use of Scalar Field remains subject to its Terms of Use and Privacy Policy. |
+| Algorithmic Trading & US Regulations | Automated or algorithmic trading may be subject to US regulations including SEC and FINRA rules. Scalar Field does not guarantee regulatory compliance — you are solely responsible for ensuring your trading activity complies with applicable laws and brokerage policies. |
+
+Each mode then adds its own:
+
+| Mode | Additional Disclosure |
+|---|---|
+| Paper | The environment is simulated and provided by Alpaca. It does not execute live market trades or use real money, and market data, fills, buying power, and performance may differ from live trading conditions. |
+| Live | Orders are real, using real money. Market conditions, slippage, and execution timing may produce prices different from those quoted, and you may lose some or all of your invested capital. A **Risk of Loss** section adds that Scalar Field is not a registered broker-dealer, investment adviser, or fiduciary. |
+
+Tick the consent box, which differs by mode — paper reads "I acknowledge this is paper trading and agree to the Terms of Use, Privacy Policy, and Alpaca disclosures," and live reads "I understand this involves real money and agree to the Terms of Use, Privacy Policy, and Alpaca disclosures." The **Acknowledge & continue** button stays disabled until the box is ticked.
+
+![The disclosures scrolled to Risk of Loss with the consent box ticked](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-alpaca-04-live-disclosures-accepted.png)
+
+Click **Acknowledge & continue**. The button switches to **Connecting...** and the modal locks itself while the handshake runs, so you cannot dismiss it mid-flight.
+
+---
+
+## Step 4: Authorize on Alpaca
+
+A popup opens on Alpaca's own site with their login screen. Sign in, complete any two-factor step, and approve the authorization request.
+
+All of this happens on Alpaca's domain. Scalar Field never sees the login form; the only thing it receives back is a short-lived authorization code.
+
+If your browser blocked the popup, Scalar Field detects it and redirects the current tab to the same authorization page instead. The flow is identical — it just runs full-page, and you are returned to the page you started from when it finishes. A full-page redirect here is not a bug.
+
+---
+
+## Step 5: Let the Connection Finish
+
+After you approve, the popup lands on the Scalar Field callback page, which reads "Connecting your Alpaca account..." while the server exchanges the code for a token.
+
+On success it shows **"Alpaca Paper connected!"** or **"Alpaca Live connected!"** with the note "This window will close automatically," then closes itself after about a second. If Alpaca authorized both accounts in the same handshake, the message reads **"Alpaca Paper and Live connected!"** instead.
+
+The page you started from picks up the result on its own. Scalar Field signals the original tab directly, watches for the popup to close, and re-checks the account status whenever the tab regains focus — so the disclosures modal closes itself and the card flips to connected without a refresh.
+
+---
+
+## Step 6: Verify Your Alpaca Portfolio
+
+Your account now appears under **Your Venues** on the portfolio page. Click it, or go to `scalarfield.io/portfolio/alpaca-paper` or `scalarfield.io/portfolio/alpaca-live`.
+
+The page is headed **Alpaca Paper Trading** or **Alpaca Live Trading**, with a badge reading **Paper Trading** or **Brokerage** so you always know which account you are looking at. Below that:
+
+* **Account equity** as the headline number, with the day's P&L beside it
+* Three tiles: **Buying Power**, **Cash**, and **Positions**
+* An equity chart with `1D`, `1W`, `1M`, `3M`, `YTD`, and `1Y` ranges
+* **Positions**, with symbol, quantity, average cost, current price, market value, unrealized P&L, and the strategy that opened each one
+* **Quick Trade**, for placing a manual **BUY** or **SELL** without leaving the page
+* **Orders**, your recent order history with per-order **Cancel** and a **Load More** control
+
+The account number sits in the header and can be copied with one click. Once the positions table populates, your agents and strategies can trade through this account.
+
+![The connected Alpaca paper account with equity, tiles, and the margin toggle](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-alpaca-05-paper-portfolio.png)
+
+---
+
+## The Margin Toggle
+
+The account card carries a **Margin Trading** switch, and it is the one setting on this page that changes what your agents are allowed to spend.
+
+* Off, it reads "Agents trade with cash only."
+* On, it reads "Agents can trade using your full buying power, including margin."
+
+It applies per account, so paper and live are toggled independently, and it is off by default.
+
+Read the **Buying Power** tile with that in mind. It reports what Alpaca says the account can buy, which on a margin-enabled account is a multiple of your cash — in the screenshot above, buying power is roughly four times the cash balance while the toggle is still off. The toggle does not change that number; it decides whether your agents are allowed to reach past cash into it. Leave it off until you have watched an agent size positions the way you expect.
+
+---
+
+## Other Ways to Connect Alpaca
+
+The portfolio page is not the only entry point. The same disclosures-then-OAuth flow is available from:
+
+* **Chat.** The **Connect a platform** card lists **Alpaca Paper** and **Alpaca Live** with their own **Connect** buttons.
+* **Add Trading Platforms.** This menu lists both accounts and marks them **Connected** once linked.
+* **The invest flow.** When you deploy a strategy, the account step lets you connect either account inline.
+* **The Alpaca pages directly.** Visiting `/portfolio/alpaca-paper` or `/portfolio/alpaca-live` while unlinked shows an **Account Not Connected** notice with a **Connect Alpaca Paper** or **Connect Alpaca Live** button.
+
+---
+
+## How Orders Behave
+
+Alpaca is a brokerage venue with asynchronous fills, which is the detail most worth internalizing before an agent starts trading.
+
+* **Fills are asynchronous.** An order can come back `PENDING`, meaning it was submitted but not yet filled. Orders use day time-in-force, and anything placed outside US market hours stays pending until the next open. Pending orders are reconciled automatically.
+* **Positions and cash update on terminal states only.** A partial fill on a live order is not reflected until the order is filled, cancelled, or expired.
+* **Equities use plain tickers.** `AAPL` is all you need.
+* **Options use OPRA/OSI symbols.** For example, `AAPL260919C00250000`. Option positions carry a multiplier of 100, so market value is quantity times price times 100.
+* **Fractional quantities work for equities.** To size from a dollar budget, divide the budget by the price and round to two decimals.
+* **Slippage settings do not apply.** The `slippage_bps` parameter is ignored for Alpaca.
+* **Avoid trading in the Alpaca dashboard while a strategy is active** on the same account. Concurrent manual trades and agent trades can put positions out of sync, which triggers reconciliation.
+
+Because both accounts share these semantics, promoting a verified strategy is a one-word change:
+
+```python
+from scalarlib import venue
+
+# Verified on paper
+venue.trade("buy", "AAPL", 5, account="ALPACA_PAPER")
+
+# The same call, against the live account
+venue.trade("buy", "AAPL", 5, account="ALPACA_LIVE")
+```
+
+---
+
+## Troubleshooting
+
+| What You See | What It Means | What To Do |
+|---|---|---|
+| The whole tab redirected instead of a popup | Your browser blocked the popup, so Scalar Field used the same-tab fallback | Nothing to fix — finish the login and you'll be returned to where you started |
+| "Connecting your Alpaca account..." for a long time | The token exchange is still running on the server | Give it a few seconds; the page re-checks status on its own |
+| "Connection failed" | The token exchange failed | Click **Try Again** on that screen, which restarts the handshake |
+| "No authorization code received from Alpaca." | The callback arrived without a code, usually from a stale or manually edited URL | Start again from the portfolio page |
+| The popup closed and nothing happened | The popup was closed before you approved, which cancels the attempt silently | Click **Connect** again |
+| Paper is connected but live still shows **Connect** | They are separate connections | Connect **Alpaca Live Trading** from its own card |
+| An order stays `PENDING` | Normal for off-hours orders, and possible during the session | Wait for the next open; reconciliation tracks it for you |
+| "Order failed -- the symbol may be invalid or unavailable for trading." | The symbol was rejected | Check the ticker, or the OPRA/OSI format for options |
+| **Cannot Disconnect** | An agent depends on the account | Pause or delete the listed agents, then disconnect |
+
+---
+
+## How to Disconnect Alpaca
+
+Open the portfolio page for the account you want to remove — `/portfolio/alpaca-paper` or `/portfolio/alpaca-live` — and click **Disconnect**.
+
+The confirmation is titled **Disconnect Alpaca Paper** or **Disconnect Alpaca Live**, and reads: "This will disconnect your Alpaca paper trading account from the platform. You can reconnect at any time." Confirm, and you land back on your portfolio.
+
+![The Disconnect Alpaca Paper confirmation modal](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-alpaca-06-disconnect.png)
+
+One guard applies. If an agent currently depends on the account, the disconnect is refused with a **Cannot Disconnect** notice: "The following agents depend on this connection and must be paused or deleted first." The blocking agents are listed by name, so nothing breaks silently. Pause or delete them, then disconnect.
+
+---
+
+## Final Checklist
+
+Before you point an agent at the account, confirm:
+
+* **Mode:** You connected the account you meant to — paper for verification, live for real orders.
+* **Authorization:** You completed login on Alpaca's own page, including any two-factor step.
+* **Status:** The account appears under **Your Venues** on the portfolio page.
+* **Data:** Equity, buying power, cash, positions, and orders load on the account's page.
+* **Margin:** The **Margin Trading** toggle is set the way you intend, and off unless you want agents using margin.
+* **Symbols:** You know equities use plain tickers and options use OPRA/OSI symbols.
+* **Fills:** You expect `PENDING` orders off-hours, and know positions update only on terminal states.
+* **Exit:** You know that agents depending on the account will block a disconnect.
+
+---
+
+## Final Thoughts
+
+Alpaca is the easiest venue to be disciplined about, because the paper account removes every excuse for skipping verification. The connection is the same, the page is the same, the code is the same — the only difference is whether the fills are real.
+
+Use that. Run the strategy on paper until its behavior is boring and predictable, keep margin off while you watch it, then connect live and start small. The broker connection is the least interesting part of the job; what you allow the agent to do with it is the whole decision.
+
+For venue-specific execution details and the research functions available for equity and options strategies, see the [Alpaca venue documentation](https://scalarfield.io/docs/trading/venues/alpaca).

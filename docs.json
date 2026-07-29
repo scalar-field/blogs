@@ -59,6 +59,18 @@
           "guides/build-broker-connected-ai-trading-agent",
           "guides/move-from-backtest-to-live-strategy"
         ]
+      },
+      {
+        "group": "Venues",
+        "icon": "https://mintlify.s3.us-west-1.amazonaws.com/polymarket-292d1b1b/images/icons/nav/paper.svg",
+        "pages": [
+          "guides/connect-robinhood-on-scalar-field",
+          "guides/connect-public-com-on-scalar-field",
+          "guides/connect-alpaca-on-scalar-field",
+          "guides/connect-polymarket-on-scalar-field",
+          "guides/connect-jupiter-dex-on-scalar-field",
+          "guides/connect-hyperliquid-on-scalar-field"
+        ]
       }
     ]
   },

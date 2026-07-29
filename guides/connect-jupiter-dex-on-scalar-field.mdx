@@ -1,0 +1,333 @@
+---
+title: "How to Connect Jupiter DEX on Scalar Field"
+description: "Connecting Jupiter DEX on Scalar Field opens a self-custodied Solana wallet: accept the disclosures, log in with email, fund it with USDC, and your agents can trade tokenized stocks, pre-IPO tokens..."
+date: "2026-07-29"
+mode: "center"
+---
+
+**Connecting Jupiter DEX on Scalar Field** gives your agents a Solana wallet and, through it, one of the strangest tradeable universes available anywhere: tokenized Apple and Nvidia shares that trade at 3 a.m. on a Sunday, pre-IPO tokens for SpaceX and OpenAI, commodities, index tokens, and ordinary Solana crypto — all through the same swap.
+
+Jupiter is a DEX aggregator, so there is no account to open and no order book to rest orders on. Scalar Field creates a **self-custodied Solana wallet** for you, funds sit in it as USDC, and every trade executes as a swap routed across Solana's liquidity. Setup takes about a minute, and funding is refreshingly simple: send USDC and you are done, with none of the token conversions Polymarket requires.
+
+**What you'll learn:**
+
+* How the Jupiter connection works, and what you can actually trade
+* How to open the wallet, and what to do if you already have one
+* How to activate Jupiter trading if it did not activate during setup
+* How to fund the wallet with USDC on Solana
+* How to read the portfolio page, and how to buy and sell manually
+* How orders behave, how to withdraw, how to troubleshoot, and how to disconnect
+
+---
+
+## How the Jupiter Connection Works
+
+There is no Jupiter account. Jupiter is a router: it takes your USDC, finds the best path across Solana's liquidity venues — Raydium, Orca, Meteora, and others — and swaps it for the token you asked for.
+
+That means the connection is really a wallet. Scalar Field creates a Solana wallet through **Privy** using an email login, and that wallet is self-custodied: your funds, your keys, and no ability for Scalar Field to withdraw. It holds USDC and your token positions, and all of it is publicly verifiable on-chain.
+
+The same setup also provisions **Polymarket** on Polygon, since one wallet setup covers both venues.
+
+| Specification | Value |
+|---|---|
+| Instruments | Any Jupiter-verified Solana token — xStocks, pre-IPO tokens, commodities, index tokens, crypto |
+| Symbols | `J:<mint_address>` — a `J:` prefix on the token's mint address |
+| Account name in code | `WALLET_SOL` |
+| Connection type | Self-custodied Solana wallet, email login through Privy |
+| Custody | Yours — Scalar Field can trade but never withdraw |
+| Network | Solana |
+| Trading currency | USDC in the Solana wallet |
+| Hours | 24/7, including tokenized equities |
+| Fill model | Synchronous ExactIn swaps |
+| Slippage tolerance | `slippage_bps`, default 50 (0.5%) |
+| Fractional | Yes |
+| Paper mode | None — Jupiter is live only |
+
+The tradeable universe is worth dwelling on, because it is the reason to connect Jupiter at all:
+
+* **Tokenized equities (xStocks)** — tokens like `AAPLx`, `NVDAx`, and `TSLAx`, each backed 1:1 by the underlying security, tradeable around the clock rather than only during US market hours.
+* **Pre-IPO tokens** — exposure to SpaceX, OpenAI, Anthropic, and Anduril.
+* **Index and commodity tokens** — such as `SPYx`, `QQQx`, `GLDx`, and `SLVx`.
+* **Solana crypto** — SOL, JUP, BONK, and any other Jupiter-verified token.
+
+There is no paper mode here. Unlike Polymarket or Alpaca, every Jupiter trade is real, which is worth knowing before you point a new strategy at it.
+
+---
+
+## Before You Start
+
+| Requirement | Why It Matters |
+|---|---|
+| An email address | The only credential; Privy sends a six-digit code to it |
+| USDC on Solana, or a card | Send USDC directly, or buy it in-app through MoonPay |
+| About a minute for setup | Plus a few minutes for funds to arrive |
+| A little SOL, eventually | Solana transactions need gas; keep a small SOL balance for headroom |
+
+No browser extension, no existing crypto wallet, and no Jupiter account. If you already connected Polymarket, you may already have everything — skip to Step 7 and check whether Jupiter is marked live.
+
+---
+
+## Step 1: Open Your Portfolio
+
+Sign in to Scalar Field and click **Portfolio** in the left sidebar, or go to `scalarfield.io/portfolio`. Scroll to **Connect More**, headed "Add exchanges, brokerages, and trading venues."
+
+![The Connect More section on the Scalar Field portfolio page](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-jupiter-01-portfolio-connect-more.png)
+
+---
+
+## Step 2: Click Set Up Wallet on the Jupiter DEX Card
+
+The **Jupiter DEX** card is described as "Trade tokenized stocks, indices, commodities, and crypto on Solana," with a **Full Trading** badge.
+
+![The Jupiter DEX card with its Full Trading badge and Set Up Wallet button](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-jupiter-02-jupiter-card.png)
+
+The button reflects how far along you already are:
+
+| What the button says | What it means | What it opens |
+|---|---|---|
+| **Set Up Wallet**, under "Requires wallet setup first" | You have no wallet yet, or a wallet without a Solana address | The wallet setup flow |
+| **Activate Trading** | Your Solana wallet exists but Jupiter is not activated | The Jupiter page, to finish activation |
+| The card is gone | Jupiter is connected | Look under **Your Venues** |
+
+Click **Set Up Wallet** and continue. If your button reads **Activate Trading**, skip ahead to *If Jupiter Did Not Activate*.
+
+---
+
+## Step 3: Review and Accept the Disclosures
+
+The modal is headed **Acknowledgement of terms** — "Review the following before activating your trading account."
+
+![The Acknowledgement of terms modal as it opens](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-jupiter-03-disclosures.jpg)
+
+Seven numbered sections sit in a scrollable panel, with only the first two visible at rest. The ones that matter most for Jupiter:
+
+| # | Section | What It Says |
+|---|---|---|
+| 01 | Risk Disclosure | Trading involves substantial risk, including total loss of deposited funds. Token swaps executed through Jupiter on Solana are subject to **volatility, price slippage, and smart contract risk**. |
+| 02 | Non-Custodial Nature | Scalar Field does not hold, control, or custody funds. Wallets are self-custodied through Privy, you are responsible for their security, and Scalar Field cannot reverse transactions or recover lost funds. |
+| 03 | Third-Party Services | Swaps route through Jupiter DEX on Solana, which Scalar Field does not own or operate. |
+| 04 | No Financial Advice | Nothing on the platform is financial, investment, tax, legal, or accounting advice. |
+| 05 | Eligibility | You are legally permitted to use these services in your jurisdiction and are not subject to sanctions. |
+| 06 | Algorithmic Trading & US Regulations | Automated trading may be subject to SEC and FINRA rules; compliance is your responsibility. |
+| 07 | Beta Disclaimer | Wallet and trading features are in beta and provided as-is. |
+
+Smart contract risk and slippage are specific to this venue. A swap on a thin token can fill well away from the price you saw, which is what the slippage setting exists to bound.
+
+Tick both boxes — one for the **Terms of Use** and **Privacy Policy**, one for **Polymarket Terms** and **Jupiter Terms** — and **Acknowledge & continue** becomes available.
+
+![Both consent boxes ticked and the Acknowledge & continue button enabled](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-jupiter-04-disclosures-accepted.jpg)
+
+---
+
+## Step 4: Log In With Email
+
+Setup starts as soon as you acknowledge, and a Privy window opens reading **Log in or sign up**. Enter your email.
+
+![The Privy log in or sign up window](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-jupiter-05-privy-email.png)
+
+Privy emails a six-digit code and asks for it on the **Enter confirmation code** screen. **Resend code** is at the bottom if it does not arrive.
+
+![The Enter confirmation code screen](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-jupiter-06-privy-code.png)
+
+There is no password and no seed phrase. Access to the email is access to the wallet, so treat that inbox as the security boundary for whatever you fund.
+
+If you close the Privy window by accident, the panel behind it reads **Create trading access** with a **Continue with Email** button to restart.
+
+---
+
+## Step 5: Watch the Wallet Get Built
+
+The panel becomes **Opening wallet mandate** — "Your custody wallet, signers, and venue permissions are being configured" — with an **Execution Queue** progress bar.
+
+![The Opening wallet mandate screen](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-jupiter-07-opening-wallet-mandate.jpg)
+
+The rows above the bar confirm the arrangement: custody **Self-custodied** and **User controlled**, authentication **Email** via **Privy**, and venue coverage **Polymarket + Jupiter + Hyperliquid**.
+
+Partway through it switches to **Activating venues** — "We are provisioning trading credentials, approvals, and venue routing" — and both addresses appear, **Polygon custody** and **Solana custody**.
+
+![The Activating venues screen showing both custody addresses](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-jupiter-08-activating-venues.jpg)
+
+Two steps in that queue are the Jupiter ones. **Setting Up Solana wallet...** creates the wallet that will hold your USDC and positions. **Configuring server signers...** registers a Scalar Field trading key on it — the thing that lets an agent sign a swap while you are asleep. The platform is direct about the boundary: the key can trade but never withdraw.
+
+Closing the modal is safe. A banner reads "Setting up your wallet..." with the note "You can close this and setup will continue in the background."
+
+---
+
+## Step 6: Confirm the Wallet Is Live
+
+When the queue finishes, the panel reads **Execution wallet live** — "Your self-custodied wallet is ready for market access."
+
+![The Execution wallet live screen with Jupiter marked Live](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-jupiter-09-wallet-live.jpg)
+
+Check that **Jupiter (Solana)** reads **Live**. **Hyperliquid (Arbitrum)** reads **Set up from the Hyperliquid page**, which is expected — it shares the wallet but has its own setup.
+
+Click **Done**.
+
+---
+
+## Step 7: Verify Your Jupiter Account
+
+Jupiter now appears under **Your Venues** with a **DEX** badge.
+
+![The Jupiter DEX card under Your Venues](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-jupiter-10-venue-card.png)
+
+Click it, or go to `scalarfield.io/portfolio/jupiter`.
+
+![The connected but unfunded Jupiter portfolio page](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-jupiter-11-portfolio.png)
+
+The header shows your Solana address, which you can copy or open on **Solscan** through the external-link icon, plus **Fund**, **Withdraw**, refresh, and **Disconnect**. Below sits your portfolio value labelled **Solana NAV** — the wallet's net asset value, USDC plus positions — an empty chart with `1D`, `1W`, `1M`, `3M`, `YTD`, and `1Y` ranges, and three tiles: **USDC**, **Positions**, and **P&L**.
+
+Everything reads zero and P&L reads **N/A**, which is correct for a wallet with no money in it. Further down the page you also get:
+
+* **Quick links** to **Solscan** for on-chain activity and to your **Jupiter Portfolio** for transactions
+* **Buy Token**, a manual swap panel with token search, quantity, and a slippage field in basis points
+* **Positions**, with symbol, quantity, average cost, current price, market value, P&L, the strategy that opened it, and a per-row **Sell**
+* **Trade History**, with time, symbol, side, quantity, price, amount, fee, transaction link, and strategy
+
+Because everything settles on-chain, the transaction links are the final word on what happened — no reconciliation required.
+
+---
+
+## If Jupiter Did Not Activate
+
+Two partial states are common enough to be worth naming, and neither requires starting over.
+
+**You have a wallet but no Solana address.** This happens if you connected Polymarket earlier and the Solana step was skipped. Clicking **Set Up Wallet** opens a panel headed **Add Solana execution** — "Polygon custody is live. Add Solana routing to unlock Jupiter trading." Click **Create Solana Wallet**.
+
+**You have a Solana wallet but Jupiter is not activated.** The card reads **Activate Trading**, and the Jupiter page shows **Set Up Jupiter Trading** — "Swap Solana tokens, including tokenized stocks (xStocks), funded by USDC on Solana" — as a two-step checklist:
+
+1. **Fund your Solana wallet.** Buy USDC with a card or send USDC on Solana, via **Fund Wallet**.
+2. **Enable trading.** A one-time approval of a Scalar Field trading key for your Solana wallet, described as: "Funds stay in your wallet; the key can trade but never withdraw." Click **Enable Trading**; it takes about ten seconds.
+
+If the wallet setup warned that "Jupiter trading could not be activated. You can retry from the Jupiter portfolio page," this checklist is where you retry.
+
+---
+
+## Step 8: Fund the Wallet
+
+Click **Fund**. The **Fund Your Wallet** modal, headed "Add USDC to your Solana wallet," offers two routes.
+
+![The Fund Your Wallet modal in Solana mode](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-jupiter-12-fund-wallet.png)
+
+**Buy with a card.** **Buy USDC** opens MoonPay: "Buy USDC directly with your credit or debit card." Funds are deposited on Solana and typically arrive within five minutes.
+
+**Send crypto directly.** Under "Or send crypto directly" is your address, with a QR code and copy button, captioned "Send USDC (SPL) on Solana to this address."
+
+Two things to get right, because neither is recoverable:
+
+* **The network must be Solana.** Withdrawing from an exchange, select Solana — not Ethereum, not Polygon.
+* **Send SPL USDC**, the standard USDC on Solana.
+
+While a deposit is in flight the page shows "Looking for your deposit — your balance will update if the payment went through," then "Deposit complete!" when it lands.
+
+And that is the whole funding story. Jupiter trades directly with the USDC in your Solana wallet — there is no second wallet to transfer into and no token to convert, which is the main way this differs from Polymarket. Keep a little **SOL** on hand for transaction fees, since Solana charges gas in SOL rather than USDC.
+
+Once USDC shows up in the **USDC** tile, your agents and strategies can trade.
+
+---
+
+## How Orders Behave
+
+Jupiter is a swap venue, not a broker, and three of its quirks will shape your strategy code.
+
+* **Symbols are `J:`-prefixed mint addresses**, like `J:DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263`. Plain tickers such as `BONK` are rejected, because lookalike tokens share symbols on Solana. Resolve tokens with `searchJupiterTokens()` or `screenJupiterTokens()`.
+* **Swaps are ExactIn.** Your requested quantity is converted at the current price, so `filled_qty` can differ slightly from what you asked for. Read holdings back from `venue.positions()` rather than assuming the request was filled exactly.
+* **Fills are synchronous.** The trade call blocks until the swap confirms or fails, and the response carries `tx_hash`, the Solana transaction signature.
+* **Slippage defaults to 50 bps** (0.5%), settable per trade. Widen it for thin tokens; the manual **Buy Token** panel exposes the same setting.
+* **Everything trades 24/7**, including tokenized equities. There are no market hours to schedule around.
+* **There is no order book.** Jupiter aggregates liquidity, so there is a live price but no bid, ask, or depth.
+* **Selling can leave dust.** Treat positions under $0.10 of market value as closed.
+* **On-chain state lags slightly.** Allow a moment for settlement before re-querying positions after a fill — the sell dialog says as much.
+
+```python
+from scalarlib import searchJupiterTokens, venue
+
+# Resolve a token to its J: ticker
+tokens = searchJupiterTokens("anthropic")
+ticker = tokens.iloc[0]["ticker"]        # 'J:<mint>'
+
+# Buy 5 tokens through the Solana wallet
+resp = venue.trade("buy", ticker, 5, account="WALLET_SOL")
+print(resp["status"], resp["filled_qty"], resp["avg_price"])
+
+# Sell with a wider slippage tolerance
+venue.trade("sell", ticker, 2.5, account="WALLET_SOL", slippage_bps=100)
+```
+
+---
+
+## How to Withdraw
+
+Click **Withdraw** on the Jupiter page.
+
+![The Withdraw Funds modal in Solana mode](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-jupiter-13-withdraw.png)
+
+Choose **USDC** or **SOL**, paste a recipient address, and enter an amount — **MAX** fills in the full balance. Unlike the Polygon side, there is **no withdrawal fee** on Solana for either token.
+
+Valid destinations are listed in the modal: personal wallets that support Solana (Phantom, Solflare, Backpack, Coinbase Wallet), exchange deposit addresses that accept Solana deposits (Coinbase, Kraken, Binance — selecting "Solana" as the network), another Scalar Field user's Solana address, or any base58 Solana public key.
+
+The warning deserves quoting in full, because self-custody offers no recourse: "Only send to addresses on the **Solana** network. Sending to the wrong network means permanent loss of funds. Double-check the recipient address — all transfers are irreversible."
+
+Review, confirm, and **Withdrawal Complete** confirms it was submitted to the Solana network. One practical note: **MAX** on SOL will empty the wallet, and an empty SOL balance leaves nothing to pay gas with, so leave a little behind if you plan to keep trading.
+
+---
+
+## Troubleshooting
+
+| What You See | What It Means | What To Do |
+|---|---|---|
+| The card reads **Activate Trading** | The wallet exists but Jupiter's trading key is not registered | Open the Jupiter page and click **Enable Trading** |
+| **Add Solana execution** appears | Your wallet has Polygon custody but no Solana wallet | Click **Create Solana Wallet** |
+| "Jupiter trading could not be activated." | Activation failed during wallet setup | Retry from the Jupiter page — nothing else is affected |
+| "Solana server signer could not be registered..." | The trading key was not registered | Click **Enable Trading** on the Jupiter page |
+| "Solana wallet not found. Please set up your wallet with Solana support first." | No Solana address is linked | Run **Add Solana execution** first |
+| "Solana wallet was not created. Disconnect and reconnect to try again." | The Solana step was skipped during setup | Reconnect the wallet; Polymarket is unaffected |
+| "Failed to enable trading" | Activation call failed | Try again; it is a one-time registration |
+| "No tokens found" | The token search matched nothing | Search by name or paste the mint address |
+| "Trade failed" or "Sell failed" | The swap was rejected or did not confirm | Check USDC balance, keep some SOL for gas, and widen slippage on thin tokens |
+| A fill is smaller than requested | Expected — swaps are ExactIn | Read actual holdings from positions |
+| Positions look stale right after a trade | On-chain settlement takes a moment | Use refresh, or check the transaction on Solscan |
+| Deposit sent but the balance is zero | Wrong network, or non-SPL USDC | Confirm you sent SPL USDC on Solana |
+| **Cannot Disconnect** | An agent depends on the connection | Pause or delete the listed agents, then disconnect |
+
+---
+
+## How to Disconnect
+
+Click **Disconnect** on the Jupiter page.
+
+![The Disconnect Wallet confirmation modal](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-jupiter-14-disconnect.png)
+
+The confirmation is titled **Disconnect Wallet**: "This will remove your wallet connection. Polymarket trading and Jupiter DEX credentials from ScalarField will be deleted. Your on-chain funds and positions are not affected."
+
+Read that first sentence carefully, because it is easy to misread as Jupiter-only. **Disconnecting here disconnects the whole wallet**, so Polymarket goes with it. There is no way to detach Jupiter alone — it is one wallet, and this removes Scalar Field's access to all of it.
+
+Your money is not affected. The wallet still exists, balances and positions remain on-chain and visible on Solscan, and logging back in with the same email restores access.
+
+If an agent currently depends on the connection, the disconnect is refused with a **Cannot Disconnect** notice listing the agents by name. Pause or delete them, then disconnect.
+
+---
+
+## Final Checklist
+
+Before you point an agent at the account, confirm:
+
+* **Wallet:** Setup finished, and **Jupiter (Solana)** reads **Live**.
+* **Activation:** The Jupiter page shows the portfolio dashboard, not the **Set Up Jupiter Trading** checklist.
+* **Access:** You know which email opens the wallet, and that it is the only credential.
+* **Funding:** You sent SPL USDC on the Solana network, and it shows in the **USDC** tile.
+* **Gas:** A small SOL balance is available for transaction fees.
+* **Symbols:** Your strategy resolves `J:` mint addresses rather than passing plain tickers.
+* **Slippage:** You have set `slippage_bps` deliberately for the liquidity you are trading.
+* **Live only:** You understand there is no Jupiter paper mode, so first trades should be small.
+* **Exit:** You know disconnecting removes Polymarket too, but never touches funds.
+
+---
+
+## Final Thoughts
+
+Jupiter is the most open venue on Scalar Field and the least forgiving. Open, because a strategy can hold tokenized Nvidia, SpaceX exposure, and SOL in one wallet and rebalance at midnight. Unforgiving, because there is no paper mode, no order book to hide behind, and no one to reverse a bad swap.
+
+Handle that with sizing and slippage rather than caution about the connection itself. Fund the wallet with an amount you would accept losing, keep slippage tight on liquid tokens and deliberately wide on thin ones, and let the first few swaps be small enough that a surprising fill is a lesson rather than a loss. Every trade lands on-chain with a transaction hash, so verification is always available — use it early, while you are still learning what your agent actually does.
+
+For the full set of research functions available for Solana token strategies, see the [Jupiter DEX venue documentation](https://scalarfield.io/docs/trading/venues/jupiter).

@@ -1,0 +1,189 @@
+---
+title: "How to Connect Public.com on Scalar Field"
+description: "Connecting Public.com on Scalar Field takes about a minute: accept the disclosures, authorize over OAuth, and your equities, ETF, and options positions..."
+date: "2026-07-29"
+mode: "center"
+---
+
+**Connecting Public.com on Scalar Field** links a live brokerage account to your agents and strategies. Once the account is authorized, Scalar Field reads your positions, balances, and order history, and can place equity, ETF, and options orders inside the limits you define.
+
+This guide walks through the connection step by step. Unlike the Robinhood integration, Public.com needs no browser extension — it is a straight OAuth handshake in a popup, so the whole flow takes about a minute.
+
+**What you'll learn:**
+
+* How the Public.com connection works and what it can trade
+* What you need before you start
+* How to accept the disclosures and authorize over OAuth
+* How to verify positions, buying power, and orders after connecting
+* How orders behave, how to troubleshoot, and how to disconnect
+
+---
+
+## How the Public.com Connection Works
+
+Scalar Field connects to Public.com over **OAuth**. You log in on Public.com's own site, and Public.com returns a scoped authorization code that Scalar Field exchanges for an access token on the server. Your login credentials are never shared with or stored by Scalar Field.
+
+Everything happens in a centered popup window. There is no extension to install and nothing to configure in your browser, which makes this the simplest of the brokerage connections.
+
+The authorization request asks Public.com for four scopes: `openid` to identify the account, `marketdata` for quotes, and `trading.read` and `trading.write` to read positions and place orders. That last scope is what allows an agent to trade, so it is worth knowing you granted it.
+
+| Specification | Value |
+|---|---|
+| Instruments | US equities, ETFs, and options |
+| Connection type | OAuth in a popup window |
+| Fractional shares | Supported for equities |
+| Options symbols | OPRA/OSI format, with a 100 multiplier |
+| Trading hours | US market hours; off-hours orders queue for the next open |
+| Quotes | Last, bid, ask, and volume — no order-book depth |
+| Currency | USD |
+| Credentials | Never collected or stored by Scalar Field |
+| Integration status | Beta |
+
+That last row matters. The integration is explicitly in **beta**, so it may behave unexpectedly or experience downtime — worth knowing before you point real capital at it. Connecting is open to everyone, on any plan.
+
+---
+
+## Before You Start
+
+| Requirement | Why It Matters |
+|---|---|
+| A funded Public.com account | You authorize on Public.com's own login page |
+| Popups allowed for `scalarfield.io` | The OAuth handshake opens in a popup; if it's blocked, Scalar Field falls back to a full-page redirect |
+| About one minute | A connect attempt times out after two minutes and resets so you can retry |
+
+You do not need a desktop-only browser here. Because there is no extension involved, the popup flow works in any modern browser, and the same-tab fallback covers the cases where popups are blocked entirely.
+
+---
+
+## Step 1: Open Your Portfolio
+
+Sign in to Scalar Field and click **Portfolio** in the left sidebar, or go directly to `scalarfield.io/portfolio`.
+
+Scroll to the **Connect More** section, headed "Add exchanges, brokerages, and trading venues." Every available venue lives here.
+
+![The Connect More section on the Scalar Field portfolio page](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-public-com-01-portfolio-connect-more.png)
+
+---
+
+## Step 2: Click Connect on the Public.com Card
+
+Find the **Public.com** card, described as "US equities, ETFs, options, and crypto via Public.com." It carries a **Full trading** badge, since this connects a real brokerage account rather than a paper one.
+
+Click **Connect**. The disclosures modal opens.
+
+![The Public.com card with its Full trading badge and Connect button](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-public-com-02-public-card.png)
+
+---
+
+## Step 3: Review and Accept the Disclosures
+
+The modal is headed **Connect Public.com**, with the subtitle "Review and acknowledge before connecting your Public.com brokerage account." It presents three disclosures in a single scrollable panel. Only the first two are visible at rest, so scroll the panel to reach the third. Read all three — the first one in particular sets expectations you should not skip.
+
+![The Public.com disclosures modal as it opens](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-public-com-03-disclosures.jpg)
+
+| Disclosure | What It Says |
+|---|---|
+| Beta disclosure | The integration is in beta. Features may behave unexpectedly or experience downtime, and Scalar Field is not responsible for losses, missed trades, or account issues arising from use of the beta integration. |
+| Algorithmic trading and US regulations | Automated or algorithmic trading may be subject to US regulations including SEC and FINRA rules. Scalar Field does not guarantee regulatory compliance — you are solely responsible for ensuring your activity complies with applicable laws and brokerage policies. |
+| Security and authorization | Scalar Field connects over OAuth, so your credentials are never shared or stored. You authorize access for portfolio tracking and trade execution within the parameters you configure, and nothing in Scalar Field constitutes financial, investment, tax, legal, or accounting advice. |
+
+Tick the consent box — **"I understand this is a beta integration, acknowledge the US algo trading rules, and agree to the Terms of Use and Privacy Policy"** — and click **Acknowledge & continue**. The button stays disabled until the box is ticked.
+
+![The disclosures modal with the consent box ticked and the continue button enabled](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-public-com-04-disclosures-accepted.jpg)
+
+The disclosures modal closes as soon as you continue, and the OAuth popup opens in its place. That is expected: the connection is still in flight, and the **Connect** button shows a "Connecting…" state while it runs.
+
+---
+
+## Step 4: Authorize on Public.com
+
+A centered popup opens on Public.com's own site, showing their standard **Log in** screen with email and password fields. Sign in, complete any two-factor step, and approve the linking request that follows.
+
+![The Public.com login screen where you authorize the connection](https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-public-com-05-public-oauth.png)
+
+All of this happens on Public.com's domain. Scalar Field never sees the login form, and the only thing it receives back is a short-lived authorization code.
+
+If your browser blocked the popup, Scalar Field detects that immediately and redirects the current tab to the same authorization page instead. The flow is identical — it just runs full-page, and you are returned to the page you started from when it finishes. This fallback is common enough that you should not treat a full-page redirect as a bug.
+
+---
+
+## Step 5: Let the Connection Finish
+
+After you approve, the popup lands on the Scalar Field callback page, which reads "Connecting your Public.com account…" while the server exchanges the code for a token.
+
+On success, the popup shows **"Public.com account connected!"** with the note "This window will close automatically," then closes itself after about a second. A popup that disappears on its own is the success path, not an error.
+
+The page you started from picks up the result even if the popup's signal is lost, because Scalar Field also polls the server for the account status every two seconds and re-checks whenever the tab regains focus. A connect attempt has a hard two-minute ceiling; after that the UI resets so you can retry cleanly.
+
+---
+
+## Step 6: Verify Your Public.com Portfolio
+
+Your account now appears under **Your Venues** on the portfolio page. Click it, or go to `scalarfield.io/portfolio/public`.
+
+The page shows your portfolio value alongside three tiles — **Buying Power**, **Cash**, and **Positions** — followed by:
+
+* **Positions**, with quantity, market value, and unrealized P&L per holding
+* **Quick Trade**, for placing a manual order without leaving the page
+* **Orders**, your recent order history, paginated with a load-more control
+
+Your Public.com account type is displayed next to the account details. Once the positions table populates, your agents and strategies can trade through Public.com.
+
+---
+
+## How Orders Behave
+
+Public.com is a brokerage venue, so a few execution details differ from crypto or prediction-market venues.
+
+* **Equities use plain tickers.** `AAPL` is all you need.
+* **Options use OPRA/OSI symbols.** For example, `AAPL260919C00250000`. Option positions carry a multiplier of 100, so market value is quantity times price times 100.
+* **Fractional quantities work for equities.** To size from a dollar budget, divide the budget by the price and round to two decimals.
+* **Slippage settings do not apply.** The `slippage_bps` parameter is ignored for brokerage venues.
+* **Off-hours orders queue.** Anything submitted outside US market hours is held for the next market open.
+* **Avoid trading manually on Public.com while a strategy is active** on the same account. Concurrent manual trades and agent trades can put positions out of sync, which triggers reconciliation.
+
+---
+
+## Troubleshooting
+
+| What You See | What It Means | What To Do |
+|---|---|---|
+| The whole tab redirected instead of a popup | Your browser blocked the popup, so Scalar Field used the same-tab fallback | Nothing to fix — finish the login and you'll be returned to where you started |
+| "No authorization code received from Public.com." | The callback arrived without a code, usually from a stale or manually edited URL | Start again from the portfolio page |
+| "Connection failed" | The token exchange failed | Click **Try Again** on that screen, which restarts the handshake |
+| "Your Public.com session has expired. Please reconnect your account." | The stored authorization is no longer valid | Reconnect using the same steps; the account is marked unlinked until you do |
+| The connection never completes | The popup was closed before approval, or the two-minute ceiling elapsed | The UI resets automatically — start again from the portfolio page |
+
+If the popup closes and the page still shows the account as unlinked, give it a few seconds before retrying. Scalar Field keeps polling for eight seconds after the popup closes, because the server-side token exchange can still be running.
+
+---
+
+## How to Disconnect Public.com
+
+Open `/portfolio/public` and click **Disconnect Public.com**. The confirmation reads: "This will disconnect your Public.com account from the platform. You can reconnect at any time."
+
+One guard applies. If any agent currently depends on the account, the disconnect is refused and Scalar Field lists the blocking agents instead of silently breaking them. Pause or reassign those agents first, then disconnect.
+
+---
+
+## Final Checklist
+
+Before you point an agent at the account, confirm:
+
+* **Beta:** You understand the integration is in beta and accepted that disclosure knowingly.
+* **Authorization:** You completed login on Public.com's own page, including any two-factor step.
+* **Status:** Public.com appears under **Your Venues** on the portfolio page.
+* **Data:** Positions, buying power, cash, and orders load on `/portfolio/public`.
+* **Symbols:** You know equities use plain tickers and options use OPRA/OSI symbols.
+* **Hours:** You expect off-hours orders to queue for the next open.
+* **Exit:** You know that agents depending on the account will block a disconnect.
+
+---
+
+## Final Thoughts
+
+The Public.com connection is short by design: three disclosures, one login, and no extension. The interesting work happens after it, when you decide what an agent is allowed to do with the account.
+
+Because this venue supports equities, ETFs, and options in one account — with fractional sizing on the equity side — it fits strategies that need more instrument coverage than a plain stock connection allows. Keep the beta status in mind, start with a small allocation, and let the agent earn trust through observed behavior before you scale it.
+
+For venue-specific execution details and the research functions available for equity and options strategies, see the [Public.com venue documentation](https://scalarfield.io/docs/trading/venues/public).

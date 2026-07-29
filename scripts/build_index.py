@@ -43,6 +43,7 @@ CATEGORY = {
     "Blog": ("Insights", "insights"),
     "How to": ("How to", "how-to"),
     "Strategies": ("Strategies", "strategies"),
+    "Venues": ("Venues", "venues"),
 }
 
 MONTHS = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun",

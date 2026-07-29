@@ -281,6 +281,60 @@ window.__SF_BLOG = {
       "date": "Jun 18, 2026",
       "readTime": 11,
       "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/move-from-backtest-to-live-strategy.png"
+    },
+    {
+      "path": "/guides/connect-robinhood-on-scalar-field",
+      "title": "How to Connect Robinhood on Scalar Field",
+      "category": "Venues",
+      "slug": "venues",
+      "date": "Jul 28, 2026",
+      "readTime": 9,
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-robinhood-on-scalar-field.png"
+    },
+    {
+      "path": "/guides/connect-public-com-on-scalar-field",
+      "title": "How to Connect Public.com on Scalar Field",
+      "category": "Venues",
+      "slug": "venues",
+      "date": "Jul 29, 2026",
+      "readTime": 10,
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-public-com-on-scalar-field.png"
+    },
+    {
+      "path": "/guides/connect-alpaca-on-scalar-field",
+      "title": "How to Connect Alpaca on Scalar Field",
+      "category": "Venues",
+      "slug": "venues",
+      "date": "Jul 29, 2026",
+      "readTime": 14,
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-alpaca-on-scalar-field.png"
+    },
+    {
+      "path": "/guides/connect-polymarket-on-scalar-field",
+      "title": "How to Connect Polymarket on Scalar Field",
+      "category": "Venues",
+      "slug": "venues",
+      "date": "Jul 29, 2026",
+      "readTime": 19,
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-polymarket-on-scalar-field.png"
+    },
+    {
+      "path": "/guides/connect-jupiter-dex-on-scalar-field",
+      "title": "How to Connect Jupiter DEX on Scalar Field",
+      "category": "Venues",
+      "slug": "venues",
+      "date": "Jul 29, 2026",
+      "readTime": 17,
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-jupiter-dex-on-scalar-field.png"
+    },
+    {
+      "path": "/guides/connect-hyperliquid-on-scalar-field",
+      "title": "How to Connect Hyperliquid on Scalar Field",
+      "category": "Venues",
+      "slug": "venues",
+      "date": "Jul 29, 2026",
+      "readTime": 19,
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/connect-hyperliquid-on-scalar-field.png"
     }
   ]
 };
