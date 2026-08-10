@@ -43,6 +43,7 @@ CATEGORY = {
     "Blog": ("Insights", "insights"),
     "How to": ("How to", "how-to"),
     "Strategies": ("Strategies", "strategies"),
+    "Monitors": ("Monitors", "monitors"),
     "Venues": ("Venues", "venues"),
 }
 

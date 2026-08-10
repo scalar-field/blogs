@@ -283,6 +283,15 @@ window.__SF_BLOG = {
       "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/move-from-backtest-to-live-strategy.png"
     },
     {
+      "path": "/monitors/ai-bubble-detection-monitor",
+      "title": "Riding the AI Bubble",
+      "category": "Monitors",
+      "slug": "monitors",
+      "date": "Aug 11, 2026",
+      "readTime": 15,
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/ai-bubble-detection-monitor.png"
+    },
+    {
       "path": "/guides/connect-robinhood-on-scalar-field",
       "title": "How to Connect Robinhood on Scalar Field",
       "category": "Venues",

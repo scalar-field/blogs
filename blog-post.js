@@ -7,7 +7,7 @@
    MutationObserver. */
 (function () {
   var GRADS = ["grad-1", "grad-2", "grad-3", "grad-4"];
-  var ARTICLE_PATH = /^\/(guides|strategies)\//;
+  var ARTICLE_PATH = /^\/(guides|strategies|monitors)\//;
   var REVEAL_TIMEOUT = 1200;
   var tocObserver = null;
   var revealTimer = null;
