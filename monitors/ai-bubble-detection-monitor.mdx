@@ -1,279 +1,315 @@
 ---
 title: "Riding the AI Bubble"
-description: "Can an academic bubble-detection model tell us when to own the AI trade? We corrected our own backtest, froze the protocol, and started a prospective test."
+description: "Can an academic bubble-detection model tell us which part of the AI trade is overheating — and whether it is still worth owning?"
 date: "2026-08-11"
 mode: "center"
 ---
 
-The conventional advice about bubbles is simple: if you know you are in one, get out.
+Is AI in a bubble?
 
-But that assumes you know when the bubble will end.
+That question is usually answered with valuations, anecdotes, or comparisons with the dot-com era.
 
-Suppose instead that an investor can recognize that an industry has entered an unusual return regime but has no reliable way to predict when that regime will reverse. Selling immediately may be costly. A bubble can continue rising for months or even years after investors begin to suspect that prices have become detached from normal behavior.
+There is another way to approach it.
 
-That is the intuition behind [Riding Industry Bubbles](https://quantpedia.com/strategies/riding-industry-bubbles), the strategy documented by Quantpedia and based on the academic work of Guenster, Kole, and Jacobsen.
+Instead of asking whether AI stocks are expensive, we can ask whether their **returns have entered an abnormal statistical regime** — one in which they are rising much faster than their normal relationship with the broader market would suggest.
 
-We adapted that framework to the current AI investment cycle, corrected several methodological issues in our first implementation, froze the research protocol, and are now running the strategy prospectively through a non-trading monitoring agent. You can follow it live: [AI Bubble Rotation — Riding Industry Bubbles](https://scalarfield.io/share-strategy/ai-bubble-rotation-riding-industry-bubbles/MDHDVz0zRNXKLRKtcbcCEF3tW_ywZoRENMrQ4HDToNo).
+That is the idea behind ***Riding Industry Bubbles***, a strategy documented by Quantpedia and based on the academic work of Guenster, Kole, and Jacobsen.
 
-The official prospective record begins on **September 1, 2026**. Nothing before that date counts toward performance.
+**Read the original strategy:** [Quantpedia — Riding Industry Bubbles](https://quantpedia.com/strategies/riding-industry-bubbles)
 
-The question we are trying to answer is straightforward:
+We adapted that framework to the AI investment stack and built a live Scalar Field monitor around it.
 
-> Can the same framework tell us whether the AI trade is in a bubble — and whether an investor should ride it?
+**Follow the live monitor:** [AI Bubble Rotation — Riding Industry Bubbles](https://scalarfield.io/share-strategy/ai-bubble-rotation-riding-industry-bubbles/MDHDVz0zRNXKLRKtcbcCEF3tW_ywZoRENMrQ4HDToNo)
 
-Our first answer looked promising. The second answer was more useful.
+Today, the model gives a surprisingly narrow answer:
 
-## What does the model actually call a bubble?
+> **The AI bubble signal is currently concentrated in semiconductors.**
 
-The methodology starts with a simple question: how much of an industry's return can be explained by movements in the overall market, and how much is left unexplained?
+SOXX signals. Cloud does not. Software does not. Cybersecurity does not. Robotics does not.
 
-The unexplained portion is what researchers usually call **alpha**. The bubble test asks whether that unexplained return has experienced a persistent upward shift.
+That is what makes the framework interesting. It does not force us to classify the entire AI trade as either a bubble or not a bubble.
+
+It lets us ask **where the bubble is**.
+
+## What does the model call a bubble?
+
+The starting point is simple.
+
+Part of an industry's return can normally be explained by movements in the overall stock market.
+
+The remaining portion — the return that cannot be explained by normal market exposure — is commonly called **alpha**.
+
+The bubble methodology asks whether that abnormal return has undergone a persistent upward shift.
 
 In practical terms, the model looks for three things.
 
-**First, a significant upward break.** The industry suddenly begins earning much higher returns than its normal relationship with the market would imply.
+### 1. A significant upward break
 
-**Second, persistent abnormal performance.** The increase must remain statistically meaningful rather than reflecting a few unusually strong months.
+The industry's returns suddenly become much stronger than its normal relationship with the market would suggest.
 
-**Third, no evidence that the bubble has already broken.** A sufficiently severe recent negative shock cancels the signal.
+### 2. Persistent abnormal performance
 
-The baseline methodology uses 120 months of monthly observations and looks for a structural change that occurred roughly one to five years earlier. A useful shorthand is:
+The change must persist long enough to look like a genuine change in regime rather than a few unusually strong months.
 
-> Bubble = significant upward break + persistently abnormal returns + no recent crash
+### 3. No evidence that the bubble has already broken
 
-The last condition matters. If the industry suffers a monthly return shock more than roughly two standard deviations worse than the model expected, the strategy treats that as evidence that the bubble may already be breaking. If such a shock occurred during the previous six months, the signal is cancelled.
+A sufficiently severe negative abnormal-return shock cancels the signal.
 
-This is what makes the framework different from ordinary momentum. It is not simply buying whatever went up recently. It is looking for evidence that the industry's return-generating process itself has changed.
+A useful shorthand is:
 
-## Applying the idea to AI
+> **Bubble = structural upward break + persistent abnormal return + no recent crash**
 
-Artificial intelligence is an unusually interesting setting because there is no single "AI industry." The investment chain includes semiconductors, cloud infrastructure, software, cybersecurity, robotics, data centers, networking, power infrastructure, and broader AI-related businesses.
+The baseline methodology uses **ten years of monthly observations** and searches for a structural break that occurred roughly **one to five years earlier**.
 
-Our initial Scalar Field investigation therefore examined a wider set of AI-related ETFs and baskets. The strongest contemporary signals appeared in semiconductors and parts of the physical AI infrastructure stack. Among clean tradable ETFs, SMH and SOXX stood out particularly strongly.
+That makes this different from ordinary momentum. The model is not simply asking what has gone up recently. It is asking:
 
-We initially converted that observation into a simple strategy. When an AI bubble was detected, hold 50% SMH and 50% SOXX. Otherwise, hold SPY. The strategy activated if either ETF passed either the CAPM or Fama–French three-factor test.
+> **Has the return-generating process itself changed?**
 
-A historical walk-forward backtest beginning in 2016 produced a CAGR of approximately **12.85%**.
+## Why apply this to AI?
 
-It looked encouraging. Then we audited the research process, and we withdrew that result as validation evidence.
+AI is not one industry.
 
-## The problem was not the regression
+The investment chain includes several distinct economic layers:
 
-The problem was everything that happened around it.
+- semiconductors;
+- cloud computing;
+- software;
+- cybersecurity;
+- robotics; and
+- broader AI companies.
 
-We first observed in 2026 that SMH and SOXX were among the strongest contemporary AI bubble candidates. Then we took those same ETFs backward and asked how a strategy built around them would have performed beginning in 2016.
+Those segments do not necessarily enter speculative regimes at the same time.
 
-That introduces hindsight. The simulation itself may not have used future prices at each historical date, but the choice of which assets deserved to be simulated had already been influenced by information from 2026.
+A semiconductor boom driven by massive data-center spending may look very different from what is happening in application software or robotics.
 
-There were other degrees of freedom as well:
+So rather than create one synthetic "AI bubble index," we defined a fixed set of representative ETFs:
 
-- Either SMH or SOXX could generate the signal.
-- Either CAPM or Fama–French could generate the signal, so a positive result from any one of four correlated tests could activate a position in both ETFs.
-- The fallback asset had also been selected after alternatives were compared historically.
-- Some newer ETFs were allowed to participate without the full ten years of history required by the original methodology.
-- The live paper agent contained a 10% cumulative-loss pause that had never been included in the historical backtest.
+| AI segment | ETF |
+|---|---|
+| Semiconductors | **SOXX** |
+| Cloud | **SKYY** |
+| Software | **IGV** |
+| Cybersecurity | **CIBR** |
+| Robotics | **ROBO** |
+| Broad AI | **AIQ** |
 
-None of these decisions is unreasonable in isolation. Together, however, they create a familiar problem in quantitative research:
+An ETF becomes eligible only after it has accumulated **120 monthly total-return observations**.
 
-> A strategy can gradually become tailored to historical data while still appearing to represent a single clean hypothesis.
+That ten-year requirement is important because the underlying statistical test needs enough history to distinguish an unusual regime from normal variation.
 
-So instead of optimizing the strategy further, we started again.
+At present, AIQ has not yet accumulated enough history to participate.
 
-## First: does the original effect replicate?
+## What does the model say today?
 
-Before returning to AI, we applied the riding-bubbles methodology to a broad Fama–French industry universe. The corrected replication uses the modern 49-industry classification, equal-weights industries currently signaling a bubble, and earns the risk-free return when none signal. The study runs from July 1936 through June 2026.
+Using factor information through June 2026, the current classification is:
 
-The first result looks encouraging.
-
-| Rule | Factor timing | CAGR | Volatility | Sharpe | Max drawdown |
-|---|---|---:|---:|---:|---:|
-| CAPM | Contemporaneous | 12.89% | 18.97% | 0.56 | −42.27% |
-| CAPM + FF3 confirmation | Contemporaneous | 10.20% | 19.25% | 0.42 | −42.69% |
-
-For comparison, the broad market produced approximately **10.99% CAGR**, a **0.53** Sharpe ratio, and a **−50.31%** maximum drawdown.
-
-Viewed only through this lens, the CAPM result appears supportive of the original idea. But there is an important problem hidden inside many academic backtests.
-
-## What did the investor actually know at the time?
-
-A researcher today can download a complete historical factor dataset. An investor operating in real time could only use observations that had actually been published by that point.
-
-That difference sounds technical. It turned out to be economically important. We therefore ran the replication again using a deliberately conservative publication lag.
-
-| Rule | Factor timing | CAGR | Volatility | Sharpe | Max drawdown |
-|---|---|---:|---:|---:|---:|
-| CAPM | Contemporaneous | 12.89% | 18.97% | 0.56 | −42.27% |
-| CAPM | Publication lag | 9.72% | 18.26% | 0.41 | −48.76% |
-| CAPM + FF3 | Contemporaneous | 10.20% | 19.25% | 0.42 | −42.69% |
-| CAPM + FF3 | Publication lag | 6.65% | 17.69% | 0.26 | −50.18% |
-
-The primary CAPM result falls from 12.89% to 9.72% CAGR. That is a decline of more than 3 percentage points of annualized return. Sharpe falls from 0.56 to 0.41, while drawdown worsens.
-
-This does not mean the original paper is wrong. It means something narrower, but important:
-
-> Performance visible in a completed academic database should not automatically be interpreted as performance that an investor could have captured in real time.
-
-That distinction matters even more once we move to the AI application.
-
-## Rebuilding the AI test
-
-We next froze the AI universe before rerunning the corrected historical analysis. One ETF represents each predefined segment.
-
-| Segment | ETF | Eligible after 120 monthly returns |
-|---|---|---|
-| Semiconductors | SOXX | July 2011 |
-| Software | IGV | July 2011 |
-| Cloud | SKYY | July 2021 |
-| Robotics | ROBO | October 2023 |
-| Cybersecurity | CIBR | July 2025 |
-| Broad AI | AIQ | Not yet eligible |
-
-An ETF cannot participate until it has accumulated 120 monthly total-return observations. That means ten full years of history.
-
-We also removed the earlier multiple-testing rule. CAPM now determines the official allocation. The Fama–French three-factor result is calculated separately as a robustness check; it does not independently activate the portfolio.
-
-If several eligible ETFs signal simultaneously, they are equally weighted. If only SOXX signals, SOXX receives 100% of the bubble allocation. If SOXX and SKYY signal, each receives 50%. When no AI ETF signals, the production portfolio holds SPY.
-
-The corrected production backtest also charges 10 basis points per one-way turnover.
-
-## The corrected AI result
-
-The result is considerably less exciting. It is also considerably more believable.
-
-| Signal rule | Timing | AI strategy CAGR | SPY CAGR | AI Sharpe | SPY Sharpe |
-|---|---|---:|---:|---:|---:|
-| CAPM | Contemporaneous | 14.70% | 14.40% | 0.82 | 0.91 |
-| CAPM | Publication lag | 13.67% | 15.57% | 0.82 | 0.99 |
-| CAPM + FF3 | Contemporaneous | 14.75% | 14.40% | 0.83 | 0.91 |
-| CAPM + FF3 | Publication lag | 13.70% | 15.57% | 0.82 | 0.99 |
-
-Under the convenient contemporaneous-data convention, CAPM adds only around 0.30 percentage points of annual return relative to SPY. Even then, the strategy has a lower Sharpe ratio.
-
-Under the more conservative publication-lag convention, the conclusion reverses. The AI strategy earns 13.67% annually, compared with 15.57% for SPY. That is an annual shortfall of roughly 1.9 percentage points. Maximum drawdown is approximately −23.93% in both the strategy and SPY over their comparable periods.
-
-So the corrected historical evidence does not support the claim that we have discovered a validated AI trading strategy.
-
-## It is barely an AI portfolio most of the time
-
-Another result helps explain why. The strategy enters an AI-bubble regime during only:
-
-- **2.22%** of months under contemporaneous CAPM
-- **1.12%** under publication-lagged CAPM
-- **1.67%** under contemporaneous CAPM+FF3
-- **0.56%** under publication-lagged CAPM+FF3
-
-Under the primary conservative specification, the portfolio therefore spends nearly 99% of historical months outside an AI-bubble allocation. That suggests a more accurate description of the production strategy:
-
-> It is SPY with an occasional substitution into an AI segment experiencing statistically abnormal acceleration.
-
-This also changes the right benchmark. The relevant question is not "did the strategy make money?" The right question is: did switching away from SPY during the rare bubble regimes improve the result relative to simply holding SPY?
-
-Historically, under the conservative timing convention, the answer is currently no.
-
-## What about the 10% stop?
-
-The original paper agent included a 10% loss pause. Rather than silently incorporate that rule into the corrected strategy, we tested it separately.
-
-The stop triggered once in each conservative-lag variant. It did not materially improve CAGR, Sharpe, or maximum drawdown. The historical test also used month-end observations, so it should not be interpreted as equivalent to a continuously monitored live stop.
-
-There is currently no convincing evidence that the 10% overlay adds value. It is therefore excluded from the primary experiment.
-
-## Is AI in a bubble now?
-
-This is where the exercise becomes interesting again. Using factor information through June 30, 2026, the frozen universe produces the following classification.
-
-| ETF | 120-month eligible? | CAPM | CAPM + FF3 |
+| ETF | Eligible? | CAPM signal | CAPM + FF3 check |
 |---|---|---|---|
-| SOXX | Yes | Bubble | Bubble |
+| **SOXX** | Yes | **Bubble** | **Bubble** |
 | SKYY | Yes | No | No |
 | IGV | Yes | No | No |
 | CIBR | Yes | No | No |
 | ROBO | Yes | No | No |
 | AIQ | No | — | — |
 
-Only SOXX signals. So the model is not saying "AI is in a bubble." It is saying something narrower:
+The signal is therefore not "AI is in a bubble." It is:
 
-> Under this statistical definition, the current bubble signal is concentrated in semiconductors.
+> **Semiconductors currently exhibit the statistical characteristics of an active bubble regime.**
 
-Cloud does not signal. Software does not signal. Cybersecurity does not signal. Robotics does not signal.
+That distinction matters.
 
-That distinction matters. If the AI trade eventually broadens from semiconductors into software, cloud, robotics, or another part of the stack, the model has an opportunity to identify that transition without us changing the universe after the fact. But a historical backtest can no longer tell us cleanly whether that will work.
+Cloud does not currently qualify. Software does not. Cybersecurity does not. Robotics does not.
 
-## So we stopped optimizing
+The strongest abnormal acceleration appears to be concentrated in the infrastructure layer supplying the AI buildout.
 
-At this stage, we could have kept experimenting. Change the ETF universe. Try another breakpoint threshold. Change the fallback. Add a stop loss. Try another factor model. Reduce the required history.
+If the AI investment cycle eventually broadens into software, cloud, robotics, or another part of the stack, the monitor can identify that transition using the same rules.
 
-Eventually, one of those variants would probably produce a better historical Sharpe ratio. It would also make the result progressively harder to believe.
+## What happens when an ETF signals?
 
-So we froze the experiment. The official prospective inception date is September 1, 2026, and no returns before that date count.
+The allocation rule is deliberately simple.
 
-The universe is fixed. The signal rule is fixed. The history requirement is fixed. The fallback rules are fixed. The transaction-cost assumption is fixed. The agent now records what happens without changing the experiment in response to performance.
+If only one eligible ETF is classified as being in a bubble, it receives the full bubble allocation. So today:
 
-## The monitoring agent
+> **SOXX signals → 100% SOXX**
 
-The agent monitors SOXX, SKYY, IGV, CIBR, ROBO, and AIQ. It runs every weekday at 9:35 a.m. ET.
+If two ETFs signal, **each receives 50%**. If three signal, **each receives one-third**. And so on.
 
-That does not make this a daily strategy. The weekday run simply checks whether newly eligible monthly factor data have become available. If there is no new monthly factor vintage, nothing changes. If new monthly data become available, the agent calculates one new signal and records one new allocation decision.
+The model is recalculated using monthly data.
 
-The same dataset cannot generate repeated portfolio decisions simply because the agent checked it several days in a row. This preserves the monthly structure of the original research while making the experiment operationally automatic.
+This is not a high-frequency strategy and it does not react to every daily move in AI stocks.
+
+## Does riding bubbles actually work?
+
+Before applying the idea to AI, we ran the methodology across a broad universe of Fama–French industry portfolios from **July 1936 through June 2026**.
+
+Using the conventional academic treatment of factor data, the CAPM version produced:
+
+| | CAGR | Sharpe | Max drawdown |
+|---|---:|---:|---:|
+| **Industry bubble strategy** | **12.89%** | **0.56** | −42.27% |
+| Broad market | 10.99% | 0.53 | −50.31% |
+
+That is broadly consistent with the intuition behind the original research.
+
+But there is an important implementation issue.
+
+Historical academic datasets are clean in retrospect. A real investor can only trade on data once that information has actually become available.
+
+So we also ran a deliberately conservative version that delays the factor information before allowing it to affect the strategy.
+
+The result weakens:
+
+| | CAGR | Sharpe | Max drawdown |
+|---|---:|---:|---:|
+| **Contemporaneous factors** | **12.89%** | **0.56** | −42.27% |
+| **Conservative publication lag** | **9.72%** | **0.41** | −48.76% |
+
+That difference is important.
+
+It suggests that some of the apparent historical advantage is sensitive to assumptions about when factor data could actually have been used.
+
+For us, the lesson is straightforward:
+
+> **The interesting question is not only whether the strategy works in historical data. It is whether it survives when run prospectively using information actually available at the time.**
+
+That is why we built the live monitor.
+
+## How did the AI version perform historically?
+
+We also applied the same framework to the fixed AI universe.
+
+When one or more AI segments signal, the portfolio moves into those ETFs. When none signal, the production version simply holds SPY.
+
+The historical result is modest:
+
+| Signal | Timing | AI strategy CAGR | SPY CAGR | AI Sharpe | SPY Sharpe |
+|---|---|---:|---:|---:|---:|
+| CAPM | Contemporaneous | **14.70%** | 14.40% | 0.82 | **0.91** |
+| CAPM | Publication lag | **13.67%** | **15.57%** | 0.82 | **0.99** |
+
+Using contemporaneous factor data, the AI rotation adds only about **0.3 percentage points of annual return** and still has a lower Sharpe ratio than SPY.
+
+With the more conservative publication timing, it underperforms SPY by roughly **1.9 percentage points annually**.
+
+So we do **not** view the historical AI results as evidence of established trading alpha.
+
+That is not the purpose of the live strategy. The interesting part is what happens from here.
+
+## Bubble signals are rare
+
+Historically, the AI strategy spends very little time in an active bubble allocation.
+
+Under the conservative CAPM specification, an AI bubble is detected during only about **1.1% of monthly observations**.
+
+In other words, this is not really an "always invested in AI" portfolio. It is better understood as:
+
+> **A broad-market portfolio that occasionally rotates into an AI segment when that segment enters an unusually strong statistical regime.**
+
+That makes the benchmark straightforward.
+
+The strategy does not merely need to make money. It needs to outperform the market exposure it replaces.
+
+## The live experiment
+
+We are now running the strategy prospectively through a **non-trading Scalar Field monitoring agent**.
+
+**[Follow the live AI Bubble Rotation monitor →](https://scalarfield.io/share-strategy/ai-bubble-rotation-riding-industry-bubbles/MDHDVz0zRNXKLRKtcbcCEF3tW_ywZoRENMrQ4HDToNo)**
+
+The official prospective inception date is:
+
+> **September 1, 2026**
+
+No earlier returns count toward the live record.
+
+The agent runs every weekday at **9:35 a.m. ET**, but the underlying strategy remains monthly.
+
+Each weekday, the agent checks whether a new eligible monthly factor dataset has become available. If nothing new has been published, nothing changes. When new data become available, the signal is recalculated once.
 
 ## Two shadow portfolios
 
-The agent maintains two independently valued books. Each officially begins with $10,000 on September 1, 2026. They answer different questions.
+The monitor maintains two independent $10,000 shadow portfolios.
+
+They answer two slightly different questions.
 
 ### Research Book
 
-When one or more eligible AI ETFs signal, hold the signaling ETFs in equal weights. When none signal, earn the published risk-free return. There are no transaction costs in this book.
+When one or more AI ETFs signal, **equal-weight the signaling ETFs**. When no ETF signals, **earn the published risk-free return**.
 
-Its purpose is to answer the academic question: does the bubble signal itself identify unusually profitable future periods?
+This book asks:
+
+> **Does the bubble signal itself identify periods of unusually strong subsequent returns?**
 
 ### Production Book
 
-When one or more eligible AI ETFs signal, hold the signaling ETFs in equal weights. When none signal, hold SPY. The book charges 10 basis points per one-way turnover. A separate $10,000 SPY portfolio serves as the benchmark.
+When one or more AI ETFs signal, **equal-weight the signaling ETFs**. When none signal, **hold SPY**.
 
-Its question is harder: does replacing SPY with detected AI bubbles at selected moments improve the investor's outcome after costs? That is the hurdle the strategy ultimately needs to clear.
+This version includes a **10 basis-point one-way turnover assumption**. A separate SPY portfolio is tracked alongside it.
 
-## What does the agent hold today?
+This book asks the practical question:
 
-At the time the experiment was frozen, only one eligible ETF passed the primary CAPM test: **SOXX**. The Fama–French robustness specification independently reaches the same conclusion.
+> **Does temporarily replacing SPY with an AI industry in a detected bubble improve the investor's outcome after costs?**
 
-So the current preview allocation of both books is **100% SOXX**.
+That is the harder — and ultimately more useful — test.
 
-But these returns do not count. The agent remains pre-inception. Both shadow portfolios and the SPY benchmark officially begin at $10,000 on September 1, 2026.
+## The current portfolio
 
-You can follow the signal, portfolio state, and prospective record directly on [Scalar Field](https://scalarfield.io/share-strategy/ai-bubble-rotation-riding-industry-bubbles/MDHDVz0zRNXKLRKtcbcCEF3tW_ywZoRENMrQ4HDToNo).
+At the time of writing, the primary CAPM model identifies one eligible bubble:
 
-## What would count as success?
+> **SOXX**
 
-There are really two separate tests.
+The Fama–French three-factor robustness check independently reaches the same conclusion.
 
-**The academic test.** Do industries classified as bubbles subsequently earn unusually strong returns relative to the risk-free alternative? If they do, the underlying riding-bubbles mechanism receives prospective support.
+The current preview allocation is therefore:
 
-**The investment test.** Does the Production Book outperform buy-and-hold SPY after costs? That hurdle is considerably harder. It is not enough for a semiconductor bubble to keep rising. The bubble allocation must perform well enough to compensate for the SPY exposure it replaces and the turnover it creates.
+> **100% SOXX**
 
-A signal can therefore be statistically interesting without being economically useful.
+But the prospective performance record has not started yet.
 
-## Why run the experiment at all?
+Both shadow portfolios begin at **$10,000 on September 1, 2026**.
 
-The historical results do not justify a claim of validated AI alpha. But that does not make the experiment uninteresting. In some ways, it makes the prospective test more valuable.
+From that point forward, readers can see the experiment unfold directly:
 
-If the Research Book works but the Production Book does not, the signal may contain genuine information without being strong enough to improve a broad-market portfolio. If both fail, we learn that an interesting academic bubble effect does not transfer easily into the modern AI investment universe. If CAPM repeatedly identifies bubbles that the Fama–French robustness model rejects, we learn that the classification is highly dependent on the asset-pricing model.
+**[Follow AI Bubble Rotation on Scalar Field →](https://scalarfield.io/share-strategy/ai-bubble-rotation-riding-industry-bubbles/MDHDVz0zRNXKLRKtcbcCEF3tW_ywZoRENMrQ4HDToNo)**
 
-And if the bubble eventually migrates from semiconductors into cloud, software, cybersecurity, robotics, or broader AI exposure, we will observe that transition using rules chosen before the outcome was known.
+## What are we actually testing?
 
-Most importantly, the model can no longer be repaired retroactively. We cannot replace SOXX with SMH because SMH later performs better. We cannot introduce a 10% stop after experiencing a painful drawdown. We cannot switch from CAPM to FF3 because one happens to produce better prospective performance. And we cannot redefine the AI universe after seeing which new industry became profitable.
+The experiment has two possible forms of success.
 
-Any such change would represent a new strategy and require a new prospective record.
+### Does the bubble signal contain information?
 
-That is ultimately the point of the exercise. Historical backtests are easy to improve after seeing the answer. Prospective tests are not.
+If industries identified as bubbles subsequently continue generating unusually strong returns, that would support the central intuition behind *Riding Bubbles*.
 
-The original backtest gave us an interesting hypothesis. The corrected research told us that the historical evidence was weaker than it first appeared. So rather than ask the backtest for another answer, we stopped changing the question.
+### Can that information improve a portfolio?
 
-The universe is frozen. The model is frozen. The portfolio rules are frozen. The prospective inception date is frozen.
+The harder test is whether the Production Book can outperform SPY after costs.
 
-From September 1 onward, the market gets to write the rest of the paper.
+Those are not the same thing. A signal can be statistically interesting without being strong enough to create an economically better portfolio.
+
+And the AI version gives us an additional question:
+
+> **Does the bubble migrate through the AI stack?**
+
+Today it is semiconductors. Later it could appear in cloud. Software. Cybersecurity. Robotics. Or nowhere at all.
+
+The advantage of the framework is that we do not need to decide the answer narratively. We can let the same statistical process evaluate each segment over time.
+
+## Where we go from here
+
+There is no claim here that we have discovered a historically proven AI trading edge. The historical evidence is not strong enough for that.
+
+What we do have is a clear hypothesis:
+
+> **Some parts of the AI investment stack may periodically enter bubble regimes in which abnormal returns continue long enough to be worth riding.**
+
+Today, the model says that regime exists in semiconductors.
+
+Now we get to observe what happens next.
+
+The universe is fixed. The signal rules are fixed. The portfolio construction is fixed. And the prospective record begins on September 1.
+
+**[Track the live experiment →](https://scalarfield.io/share-strategy/ai-bubble-rotation-riding-industry-bubbles/MDHDVz0zRNXKLRKtcbcCEF3tW_ywZoRENMrQ4HDToNo)**
 
 ## Further reading
 
-- Source strategy: [Quantpedia — Riding Industry Bubbles](https://quantpedia.com/strategies/riding-industry-bubbles)
-- Live prospective experiment: [Scalar Field — AI Bubble Rotation: Riding Industry Bubbles](https://scalarfield.io/share-strategy/ai-bubble-rotation-riding-industry-bubbles/MDHDVz0zRNXKLRKtcbcCEF3tW_ywZoRENMrQ4HDToNo)
+- **Original strategy:** [Quantpedia — Riding Industry Bubbles](https://quantpedia.com/strategies/riding-industry-bubbles)
+- **Live AI experiment:** [Scalar Field — AI Bubble Rotation: Riding Industry Bubbles](https://scalarfield.io/share-strategy/ai-bubble-rotation-riding-industry-bubbles/MDHDVz0zRNXKLRKtcbcCEF3tW_ywZoRENMrQ4HDToNo)

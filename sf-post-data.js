@@ -288,7 +288,7 @@ window.__SF_BLOG = {
       "category": "Monitors",
       "slug": "monitors",
       "date": "Aug 11, 2026",
-      "readTime": 15,
+      "readTime": 10,
       "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/ai-bubble-detection-monitor.png"
     },
     {
