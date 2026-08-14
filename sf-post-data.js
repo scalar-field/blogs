@@ -193,6 +193,15 @@ window.__SF_BLOG = {
       "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/fed-rate-cuts-last-5-years-v2.png"
     },
     {
+      "path": "/strategies/trading-the-earnings-drift",
+      "title": "Trading the Earnings Drift",
+      "category": "Strategies",
+      "slug": "strategies",
+      "date": "Aug 15, 2026",
+      "readTime": 15,
+      "image": "https://d32mg6h25qsrpf.cloudfront.net/general_assets/blogs/trading-the-earnings-drift.png"
+    },
+    {
       "path": "/guides/build-ai-trading-agent-no-code",
       "title": "Build an AI Trading Agent Without Writing Code",
       "category": "How to",
